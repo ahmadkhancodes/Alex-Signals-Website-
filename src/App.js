@@ -1,13 +1,11 @@
 import logo from "./logo.svg";
 import "./App.css";
+import SignInPage from "./pages/SignInPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Website is Under Construction</p>
-      </header>
+    <div>
+      <SignInPage />
     </div>
   );
 }
