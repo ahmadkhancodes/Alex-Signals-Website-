@@ -1,2 +1,0 @@
-// git push heroku HEAD:master (to Push on Heroku)
-// Endpoint: https://alexsignals.herokuapp.com
