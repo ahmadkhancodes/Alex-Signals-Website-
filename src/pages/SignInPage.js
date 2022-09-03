@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { Alert } from "@mui/material";
+import DialogBox from "../componenets/DialogBox";
 
 function Copyright(props) {
   return (
@@ -23,7 +23,7 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="#">
+      <Link color="inherit" href="https://alexsignals.netlify.app/">
         Alex Signals Website
       </Link>{" "}
       {new Date().getFullYear()}
@@ -52,8 +52,8 @@ export default function SignInPage() {
   const handleForget = async (event) => {
     event.preventDefault();
     try {
-      await resetPassword("ahmadkhan.cui@gmail.com");
-      Alert("Please check your");
+      // await resetPassword("ahmadkhan.cui@gmail.com");
+      <DialogBox hh={"hello"} />;
     } catch {
       console.log("Failed to Reset Password");
     }
@@ -131,9 +131,7 @@ export default function SignInPage() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link onClick={handleForget} variant="body2">
-                    Forgot password?
-                  </Link>
+                  <Button onClick={handleForget}>Forgot password?</Button>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />
