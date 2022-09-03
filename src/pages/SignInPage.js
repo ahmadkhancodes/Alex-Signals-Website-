@@ -58,7 +58,7 @@ export default function SignInPage() {
     event.preventDefault();
     try {
       setForgotButton(true);
-      await resetPassword("ahmadkhan.cui@gmail.com");
+      await resetPassword("alex85excel@gmail.com");
     } catch {
       console.log("Failed to Reset Password");
     }
@@ -133,8 +133,7 @@ export default function SignInPage() {
               >
                 <Alert severity="error">
                   <AlertTitle>Alex, These details are invalid ☹️</AlertTitle>
-                  Remember, your email is{" "}
-                  <strong>ahmadkhan.cui@gmail.com</strong>
+                  Remember, your email is <strong>alex85excel@gmail.com</strong>
                   <br />
                   If you lost your password, just click on{" "}
                   <strong>Forgot Password</strong> below
@@ -161,7 +160,7 @@ export default function SignInPage() {
                     <Alert severity="success">
                       <AlertTitle>Success 😀</AlertTitle>
                       Password reset Instructions successfully sent on{" "}
-                      <strong>ahmadkhan.cui@gmail.com</strong>
+                      <strong>alex85excel@gmail.com</strong>
                     </Alert>
                   </Stack>
                 </Grid>
