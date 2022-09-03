@@ -12,7 +12,9 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import DialogBox from "../componenets/DialogBox";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import Stack from "@mui/material/Stack";
 
 function Copyright(props) {
   return (
@@ -35,6 +37,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInPage() {
+  const [forgotButton, setForgotButton] = React.useState(false);
   const navigate = useNavigate();
   const { login, resetPassword } = useAuth();
 
@@ -52,8 +55,8 @@ export default function SignInPage() {
   const handleForget = async (event) => {
     event.preventDefault();
     try {
-      // await resetPassword("ahmadkhan.cui@gmail.com");
-      <DialogBox hh={"hello"} />;
+      setForgotButton(true);
+      await resetPassword("ahmadkhan.cui@gmail.com");
     } catch {
       console.log("Failed to Reset Password");
     }
@@ -131,7 +134,20 @@ export default function SignInPage() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Button onClick={handleForget}>Forgot password?</Button>
+                  <Button disabled={forgotButton} onClick={handleForget}>
+                    Forgot password?
+                  </Button>
+                </Grid>
+              </Grid>
+              <Grid style={{ display: forgotButton ? "" : "none" }} container>
+                <Grid item xs>
+                  <Stack sx={{ width: "100%" }} spacing={2}>
+                    <Alert severity="success">
+                      <AlertTitle>Success</AlertTitle>
+                      Password reset Instructions sent on{" "}
+                      <strong>ahmadkhan.cui@gmail.com</strong>
+                    </Alert>
+                  </Stack>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />
