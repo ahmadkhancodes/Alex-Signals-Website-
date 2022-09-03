@@ -38,6 +38,7 @@ const theme = createTheme();
 
 export default function SignInPage() {
   const [forgotButton, setForgotButton] = React.useState(false);
+  const [error, setError] = React.useState(false);
   const navigate = useNavigate();
   const { login, resetPassword } = useAuth();
 
@@ -48,6 +49,7 @@ export default function SignInPage() {
       await login(data.get("email"), data.get("password"));
       navigate("/dashboard");
     } catch {
+      setError(true);
       console.log("Failed to Log In");
     }
   };
@@ -124,6 +126,20 @@ export default function SignInPage() {
                 id="password"
                 autoComplete="current-password"
               />
+              <Stack
+                style={{ display: error ? "" : "none" }}
+                sx={{ width: "100%" }}
+                spacing={2}
+              >
+                <Alert severity="error">
+                  <AlertTitle>Alex, These details are invalid ☹️</AlertTitle>
+                  Remember, your email is{" "}
+                  <strong>ahmadkhan.cui@gmail.com</strong>
+                  <br />
+                  If you lost your password, just click on{" "}
+                  <strong>Forgot Password</strong> below
+                </Alert>
+              </Stack>
               <Button
                 type="submit"
                 fullWidth
@@ -143,8 +159,8 @@ export default function SignInPage() {
                 <Grid item xs>
                   <Stack sx={{ width: "100%" }} spacing={2}>
                     <Alert severity="success">
-                      <AlertTitle>Success</AlertTitle>
-                      Password reset Instructions sent on{" "}
+                      <AlertTitle>Success 😀</AlertTitle>
+                      Password reset Instructions successfully sent on{" "}
                       <strong>ahmadkhan.cui@gmail.com</strong>
                     </Alert>
                   </Stack>
