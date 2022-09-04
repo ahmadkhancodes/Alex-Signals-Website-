@@ -2,7 +2,7 @@ import React from "react";
 import InputForm from "../componenets/InputForm";
 import DashboardComponent from "../componenets/DashboardComponent";
 
-function Dashboard() {
+function UnpublishedSignals() {
   return (
     <>
       <DashboardComponent Component={InputForm} />
@@ -10,4 +10,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default UnpublishedSignals;

@@ -3,7 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -15,24 +14,7 @@ import { useNavigate } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://alexsignals.netlify.app/">
-        Alex Signals Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import Copyright from "../componenets/Copyright";
 
 const theme = createTheme();
 
@@ -133,9 +115,7 @@ export default function SignInPage() {
               >
                 <Alert severity="error">
                   <AlertTitle>Alex, These details are invalid ☹️</AlertTitle>
-                  Remember, your email is <strong>alex85excel@gmail.com</strong>
-                  <br />
-                  If you lost your password, just click on{" "}
+                  If you lost your password, just click on
                   <strong>Forgot Password</strong> below
                 </Alert>
               </Stack>
@@ -159,8 +139,8 @@ export default function SignInPage() {
                   <Stack sx={{ width: "100%" }} spacing={2}>
                     <Alert severity="success">
                       <AlertTitle>Success 😀</AlertTitle>
-                      Password reset Instructions successfully sent on{" "}
-                      <strong>alex85excel@gmail.com</strong>
+                      Password reset Instructions successfully sent on your
+                      email
                     </Alert>
                   </Stack>
                 </Grid>

@@ -3,6 +3,8 @@ import Dashboard from "./pages/Dashboard";
 import { AuthProvider } from "./context/AuthContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
+import PublishedSignals from "./pages/PublishedSignals";
+import UnpublishedSignals from "./pages/UnpublishedSignals";
 
 function App() {
   return (
@@ -13,6 +15,11 @@ function App() {
             <Route path="/" element={<SignInPage />} />
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/publishedsignals" element={<PublishedSignals />} />
+              <Route
+                path="/unpublishedsignals"
+                element={<UnpublishedSignals />}
+              />
             </Route>
           </Routes>
         </AuthProvider>
