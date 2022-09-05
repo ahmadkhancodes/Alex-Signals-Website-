@@ -1,85 +1,201 @@
 import React, { useEffect, useState } from "react";
 import DashboardComponent from "../componenets/DashboardComponent";
-import { db } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Grid } from "@mui/material";
 import Line from "../componenets/Line";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 const PublishedSignalsComponent = () => {
+  var data = useSelector((state) => state.data.allData);
+  const navigate = useNavigate();
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [data, setData] = useState([]);
-  const dataCollectionRef = collection(db, "data");
 
-  useEffect(() => {
-    const getData = async () => {
-      const data = await getDocs(dataCollectionRef);
-      setData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-    getData();
-  }, [dataCollectionRef]);
   return (
     <div>
-      {data.map((item) => (
-        <>
-          <Accordion
-            expanded={expanded === item.id}
-            onChange={handleChange(item.id)}
-            style={{ width: 533 }}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1bh-content"
-              id="panel1bh-header"
+      {data
+        .filter((item) => item.close_price !== "")
+        .map((item) => (
+          <>
+            <Accordion
+              expanded={expanded === item.id}
+              onChange={handleChange(item.id)}
+              style={{ width: 533 }}
             >
-              <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                {item.action.toString().toUpperCase()}
-              </Typography>
-              <Typography sx={{ color: "black" }}>
-                {item.instrument.toString().toUpperCase()}
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Line color={"grey"} />
-              <Grid
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
                 style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  padding: 10,
+                  backgroundColor:
+                    item.action?.toString() === "buy" ? "green" : "red",
                 }}
               >
-                <Typography>Open Price</Typography>
-                <Typography>
-                  {item.open_price.toString().toUpperCase()}
+                <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                  {item.action?.toString().toUpperCase()}
                 </Typography>
-              </Grid>
-              <Line color={"white"} />
-              <Grid
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  backgroundColor: "grey",
-                  padding: 10,
-                }}
-              >
-                <Typography>Close Price</Typography>
-                <Typography>
-                  {item.close_price.toString().toUpperCase()}
+                <Typography sx={{ color: "black" }}>
+                  {item.instrument?.toString().toUpperCase()}
                 </Typography>
-              </Grid>
-            </AccordionDetails>
-          </Accordion>
-        </>
-      ))}
+              </AccordionSummary>
+              <AccordionDetails>
+                <Grid
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    padding: 10,
+                  }}
+                >
+                  <Typography>Open Price</Typography>
+                  <Typography>
+                    {item.open_price?.toString().toUpperCase()}
+                  </Typography>
+                </Grid>
+                <Grid
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    backgroundColor: "grey",
+                    padding: 10,
+                  }}
+                >
+                  <Typography color="white">Close Price</Typography>
+                  <Typography color="white">
+                    {item.close_price?.toString().toUpperCase()}
+                  </Typography>
+                </Grid>
+                <Line />
+                <Grid
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    backgroundColor: "grey",
+                    padding: 10,
+                  }}
+                >
+                  <Typography color="white">Profit</Typography>
+                  <Typography color="white">
+                    {item.profit?.toString().toUpperCase()}
+                  </Typography>
+                </Grid>
+                <Grid
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    padding: 10,
+                  }}
+                >
+                  <Typography>Take Profit</Typography>
+                  <Typography>
+                    {item.take_profit?.toString().toUpperCase()}
+                  </Typography>
+                </Grid>
+                <Line color="black" />
+                <Grid
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    padding: 10,
+                  }}
+                >
+                  <Typography>Stop Loss</Typography>
+                  <Typography>
+                    {item.stop_loss?.toString().toUpperCase()}
+                  </Typography>
+                </Grid>
+                <Grid
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    backgroundColor: "#080200",
+                    padding: 10,
+                  }}
+                >
+                  <Typography color="white">Open Time</Typography>
+                  <Typography color="white" style={{ textAlign: "end" }}>
+                    {item.open_date_and_time}
+                  </Typography>
+                </Grid>
+                <Line />
+                <Grid
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    backgroundColor: "#080200",
+                    padding: 10,
+                  }}
+                >
+                  <Typography color="white">Close Time</Typography>
+                  <Typography color="white" style={{ textAlign: "end" }}>
+                    {item.close_date_and_time}
+                  </Typography>
+                </Grid>
+                <Line />
+                <Grid
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    backgroundColor: "grey",
+                    padding: 10,
+                  }}
+                >
+                  <Typography color="white">Risk factor in points</Typography>
+                  <Typography color="white">
+                    {item.risk_factor_in_points}
+                  </Typography>
+                </Grid>
+                <Grid
+                  style={{
+                    marginTop: 10,
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Button
+                    variant="contained"
+                    color="info"
+                    style={{ width: "32%" }}
+                    onClick={() => navigate("/updatedata", { state: item })}
+                  >
+                    Update
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="success"
+                    style={{ width: "32%" }}
+                  >
+                    Duplicate
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    style={{ width: "32%" }}
+                    // onClick={() => deleteData(item.id)}
+                  >
+                    Delete
+                  </Button>
+                </Grid>
+              </AccordionDetails>
+            </Accordion>
+            <Line />
+          </>
+        ))}
     </div>
   );
 };

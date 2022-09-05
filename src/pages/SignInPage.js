@@ -115,7 +115,7 @@ export default function SignInPage() {
               >
                 <Alert severity="error">
                   <AlertTitle>Alex, These details are invalid ☹️</AlertTitle>
-                  If you lost your password, just click on
+                  If you lost your password, just click on{" "}
                   <strong>Forgot Password</strong> below
                 </Alert>
               </Stack>

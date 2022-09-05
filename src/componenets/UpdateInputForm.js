@@ -5,28 +5,29 @@ import TextField from "@mui/material/TextField";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Button from "@mui/material/Button";
+import { dataActions } from "../store/data-slice";
+import { useDispatch, useSelector } from "react-redux";
 import { set, ref } from "firebase/database";
 import { db } from "../firebase";
-import { useDispatch, useSelector } from "react-redux";
-import { dataActions } from "../store/data-slice";
 
-export default function InputForm() {
+export default function UpdateInputForm({ data }) {
   var DATA_FROM_STORE = useSelector((state) => state.data.allData);
   const dispatch = useDispatch();
+  const id = data && data.id;
   const [alignment, setAlignment] = React.useState();
   const [alignment2, setAlignment2] = React.useState();
   //Form Data states
-  const [selected, setSelected] = React.useState();
-  const [selected2, setSelected2] = React.useState();
-  const [instrument, setInstrument] = React.useState();
-  const [openprice, setOpenprice] = React.useState();
-  const [closeprice, setCloseprice] = React.useState("");
-  const [profit, setProfit] = React.useState();
-  const [takeprofit, setTakeprofit] = React.useState();
-  const [stoploss, setStoploss] = React.useState();
-  const [odat, setOdat] = React.useState();
-  const [cdat, setCdat] = React.useState();
-  const [rfip, setRfip] = React.useState();
+  const [selected, setSelected] = React.useState(data && data.action);
+  const [selected2, setSelected2] = React.useState(data && data.isactive);
+  const [instrument, setInstrument] = React.useState(data && data.instrument);
+  const [openprice, setOpenprice] = React.useState(data && data.openprice);
+  const [closeprice, setCloseprice] = React.useState(data && data.closeprice);
+  const [profit, setProfit] = React.useState(data && data.profit);
+  const [takeprofit, setTakeprofit] = React.useState(data && data.takeprofit);
+  const [stoploss, setStoploss] = React.useState(data && data.stoploss);
+  const [odat, setOdat] = React.useState(data && data.odat);
+  const [cdat, setCdat] = React.useState(data && data.cdat);
+  const [rfip, setRfip] = React.useState(data && data.rfip);
 
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment);
@@ -45,31 +46,28 @@ export default function InputForm() {
     setAlignment2(newAlignment);
   };
 
+  const handleSubmit = async () => {
+    const data = DATA_FROM_STORE.find((item) => item.id === id);
+    data["action"] = selected;
+    data["instrument"] = instrument;
+    data["isactive"] = selected2;
+    data["open_price"] = openprice;
+    data["close_price"] = closeprice;
+    data["profit"] = profit;
+    data["take_profit"] = takeprofit;
+    data["open_date_and_time"] = String(odat);
+    data["close_date_and_time"] = String(cdat);
+    data["risk_factor_in_points"] = rfip;
+    data["stop_loss"] = stoploss;
+    dispatch(dataActions.setAllData(DATA_FROM_STORE));
+  };
+
   React.useEffect(() => {
     // Storing Data into Firebase
     set(ref(db, "/data"), {
       DATA_FROM_STORE,
-    }).catch((err) => console.log(err));
+    });
   }, [DATA_FROM_STORE]);
-
-  const handleSubmit = async () => {
-    dispatch(
-      dataActions.addData({
-        id: DATA_FROM_STORE.length + 1,
-        action: selected,
-        instrument: instrument,
-        isactive: selected2,
-        open_price: openprice,
-        close_price: closeprice,
-        profit: profit,
-        take_profit: takeprofit,
-        open_date_and_time: String(odat),
-        close_date_and_time: String(cdat),
-        risk_factor_in_points: rfip,
-        stop_loss: stoploss,
-      })
-    );
-  };
 
   return (
     <React.Fragment>
@@ -85,7 +83,7 @@ export default function InputForm() {
               color: "grey",
             }}
           >
-            ADD A SIGNAL
+            UPDATE SIGNAL
           </Typography>
         </Grid>
         <Grid item xs={12} sm={12} lg={12} style={{ width: "100%" }}>
@@ -333,7 +331,7 @@ export default function InputForm() {
           style={{ marginTop: 50, textAlign: "center", width: "90%", left: 50 }}
           onClick={handleSubmit}
         >
-          Save
+          Update
         </Button>
       </Grid>
     </React.Fragment>

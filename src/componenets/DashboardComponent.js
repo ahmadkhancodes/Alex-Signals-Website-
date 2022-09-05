@@ -69,7 +69,7 @@ const Drawer = styled(MuiDrawer, {
 
 const mdTheme = createTheme();
 
-function DashboardContent({ Component }) {
+function DashboardContent({ Component, data }) {
   const { logout } = useAuth();
 
   const navigate = useNavigate();
@@ -168,7 +168,7 @@ function DashboardContent({ Component }) {
                     flexDirection: "row",
                   }}
                 >
-                  <Component />
+                  <Component data={data} />
                 </Paper>
               </Grid>
             </Grid>
@@ -180,6 +180,6 @@ function DashboardContent({ Component }) {
   );
 }
 
-export default function DashboardComponent({ Component }) {
-  return <DashboardContent Component={Component} />;
+export default function DashboardComponent({ Component, data }) {
+  return <DashboardContent Component={Component} data={data} />;
 }
