@@ -54,7 +54,7 @@ const UnPublishedSignalsComponent = () => {
   };
 
   return (
-    <div>
+    <Grid container spacing={1}>
       {data
         .filter((item) => item.close_price === "")
         .map((item) => (
@@ -233,7 +233,7 @@ const UnPublishedSignalsComponent = () => {
             <Line />
           </>
         ))}
-    </div>
+    </Grid>
   );
 };
 
