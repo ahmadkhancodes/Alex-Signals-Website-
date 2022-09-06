@@ -97,7 +97,7 @@ const UnPublishedSignalsComponent = () => {
               <AccordionDetails>
                 <Grid
                   style={{
-                    display: "flex",
+                    display: item.open_price === "" ? "none" : "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
                     padding: 10,
@@ -110,7 +110,7 @@ const UnPublishedSignalsComponent = () => {
                 </Grid>
                 <Grid
                   style={{
-                    display: "flex",
+                    display: item.close_price === "" ? "none" : "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
                     backgroundColor: "grey",
@@ -125,7 +125,7 @@ const UnPublishedSignalsComponent = () => {
                 <Line />
                 <Grid
                   style={{
-                    display: "flex",
+                    display: item.profit === "" ? "none" : "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
                     backgroundColor: "grey",
@@ -139,7 +139,7 @@ const UnPublishedSignalsComponent = () => {
                 </Grid>
                 <Grid
                   style={{
-                    display: "flex",
+                    display: item.take_profit === "" ? "none" : "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
                     padding: 10,
@@ -153,7 +153,7 @@ const UnPublishedSignalsComponent = () => {
                 <Line color="black" />
                 <Grid
                   style={{
-                    display: "flex",
+                    display: item.stop_loss === "" ? "none" : "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
                     padding: 10,
@@ -166,7 +166,11 @@ const UnPublishedSignalsComponent = () => {
                 </Grid>
                 <Grid
                   style={{
-                    display: "flex",
+                    display:
+                      item.open_date_and_time === "" ||
+                      item.open_date_and_time === "undefined"
+                        ? "none"
+                        : "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
                     backgroundColor: "#080200",
@@ -181,7 +185,11 @@ const UnPublishedSignalsComponent = () => {
                 <Line />
                 <Grid
                   style={{
-                    display: "flex",
+                    display:
+                      item.close_date_and_time === "undefined" ||
+                      item.close_date_and_time === ""
+                        ? "none"
+                        : "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
                     backgroundColor: "#080200",
@@ -196,7 +204,8 @@ const UnPublishedSignalsComponent = () => {
                 <Line />
                 <Grid
                   style={{
-                    display: "flex",
+                    display:
+                      item.risk_factor_in_points === "" ? "none" : "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
                     backgroundColor: "grey",
