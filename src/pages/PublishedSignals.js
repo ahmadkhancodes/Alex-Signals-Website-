@@ -112,10 +112,12 @@ const PublishedSignalsComponent = () => {
                     item.action?.toString() === "buy" ? "green" : "red",
                 }}
               >
-                <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                <Typography
+                  sx={{ width: "33%", flexShrink: 0, color: "white" }}
+                >
                   {item.action?.toString().toUpperCase()}
                 </Typography>
-                <Typography sx={{ color: "black" }}>
+                <Typography sx={{ color: "white" }}>
                   {item.instrument?.toString().toUpperCase()}
                 </Typography>
               </AccordionSummary>
