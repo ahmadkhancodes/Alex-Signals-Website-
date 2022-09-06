@@ -13,6 +13,8 @@ import store from "./store/index";
 import { ref, onValue } from "firebase/database";
 import { db } from "./firebase";
 import { dataActions } from "./store/data-slice";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers";
 
 function App() {
   const dispatch = useDispatch();
@@ -56,7 +58,9 @@ function App() {
 export default function AppWrapper() {
   return (
     <Provider store={store}>
-      <App />
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <App />
+      </LocalizationProvider>
     </Provider>
   );
 }

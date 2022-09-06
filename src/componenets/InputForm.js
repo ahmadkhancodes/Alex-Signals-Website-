@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
 import { dataActions } from "../store/data-slice";
 import { useNavigate } from "react-router-dom";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 export default function InputForm() {
   const navigate = useNavigate();
@@ -17,33 +18,27 @@ export default function InputForm() {
   //Form Data states
   const [selected, setSelected] = React.useState();
   const [selected2, setSelected2] = React.useState();
-  const [instrument, setInstrument] = React.useState();
-  const [openprice, setOpenprice] = React.useState();
+  const [instrument, setInstrument] = React.useState("");
+  const [openprice, setOpenprice] = React.useState("");
   const [closeprice, setCloseprice] = React.useState("");
-  const [profit, setProfit] = React.useState();
-  const [takeprofit, setTakeprofit] = React.useState();
-  const [stoploss, setStoploss] = React.useState();
-  const [odat, setOdat] = React.useState();
-  const [cdat, setCdat] = React.useState();
-  const [rfip, setRfip] = React.useState();
+  const [profit, setProfit] = React.useState("");
+  const [takeprofit, setTakeprofit] = React.useState("");
+  const [stoploss, setStoploss] = React.useState("");
+  const [odat, setOdat] = React.useState("");
+  const [cdat, setCdat] = React.useState("");
+  const [rfip, setRfip] = React.useState("");
 
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment);
-  };
-  const setActiveOrClose = (input) => {
-    setSelected2(input);
-    if (input === "active") {
-      setOdat(new Date());
-      setCdat("");
-    }
-    if (input === "closed") {
-      setCdat(new Date());
-    }
   };
   const handleAlignment2 = (event, newAlignment) => {
     setAlignment2(newAlignment);
   };
 
+  const setActive = (input) => {
+    setSelected2(input);
+    setCdat();
+  };
   const handleSubmit = async () => {
     dispatch(
       dataActions.addData({
@@ -177,7 +172,7 @@ export default function InputForm() {
           >
             <ToggleButton
               size="small"
-              onClick={() => setActiveOrClose("active")}
+              onClick={() => setActive("active")}
               value="active"
               aria-label="left aligned"
               style={{
@@ -198,7 +193,7 @@ export default function InputForm() {
             </ToggleButton>
             <ToggleButton
               size="small"
-              onClick={() => setActiveOrClose("closed")}
+              onClick={() => setSelected2("closed")}
               value="closed"
               aria-label="centered"
               style={{
@@ -279,32 +274,31 @@ export default function InputForm() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
-          <Typography style={{ color: "grey" }}>OPEN DATE AND TIME</Typography>
+        <Grid item xs={6} sm={6}>
+          <Typography style={{ color: "grey", marginBottom: 15 }}>
+            OPEN DATE AND TIME
+          </Typography>
         </Grid>
-        <Grid item xs={12} sm={12} style={{ marginTop: -45 }}>
-          <TextField
+        <Grid item xs={6} sm={6}>
+          <Typography style={{ color: "grey" }}>CLOSE DATE AND TIME</Typography>
+        </Grid>
+        <Grid item xs={6} sm={6} style={{ marginTop: -45 }}>
+          <DateTimePicker
             id="odat"
             name="odat"
             value={odat}
-            disabled={true}
-            fullWidth
-            autoComplete="family-name"
-            variant="standard"
+            onChange={(value) => setOdat(value)}
+            renderInput={(params) => <TextField {...params} />}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
-          <Typography style={{ color: "grey" }}>CLOSE DATE AND TIME</Typography>
-        </Grid>
-        <Grid item xs={12} sm={12} style={{ marginTop: -45 }}>
-          <TextField
+        <Grid item xs={6} sm={6} style={{ marginTop: -45 }}>
+          <DateTimePicker
+            disabled={selected2 === "closed" ? false : true}
             id="cdat"
             name="cdat"
             value={cdat}
-            disabled={true}
-            fullWidth
-            autoComplete="family-name"
-            variant="standard"
+            onChange={(value) => setCdat(value)}
+            renderInput={(params) => <TextField {...params} />}
           />
         </Grid>
         <Grid item xs={12} sm={12}>

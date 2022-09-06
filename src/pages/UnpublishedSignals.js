@@ -56,7 +56,19 @@ const UnPublishedSignalsComponent = () => {
   return (
     <Grid container spacing={1}>
       {data
-        .filter((item) => item.close_price === "")
+        .filter(
+          (item) =>
+            item.close_price === "" ||
+            item.instrument === "" ||
+            item.isactive === "" ||
+            item.open_price === "" ||
+            item.close_price === "" ||
+            item.stop_loss === "" ||
+            item.profit === "" ||
+            item.take_profit === "" ||
+            item.open_date_and_time === "" ||
+            item.risk_factor_in_points === ""
+        )
         .map((item) => (
           <>
             <Accordion

@@ -56,7 +56,19 @@ const PublishedSignalsComponent = () => {
   return (
     <Grid container spacing={1}>
       {data
-        .filter((item) => item.close_price !== "")
+        .filter(
+          (item) =>
+            item.instrument !== "" &&
+            item.close_price !== "" &&
+            item.action !== "" &&
+            item.isactive !== "" &&
+            item.open_price !== "" &&
+            item.profit !== "" &&
+            item.take_profit !== "" &&
+            item.stop_loss !== "" &&
+            item.open_date_and_time !== "" &&
+            item.risk_factor_in_points !== ""
+        )
         .map((item) => (
           <>
             <Accordion
@@ -65,7 +77,23 @@ const PublishedSignalsComponent = () => {
               style={{ width: 533 }}
             >
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
+                expandIcon={
+                  <>
+                    <Typography
+                      sx={{
+                        color: "white",
+                        backgroundColor: "#cfae0a",
+                        paddingLeft: 2,
+                        paddingRight: 2,
+                        display: item.isactive === "active" ? "" : "none",
+                        flexShrink: 0,
+                      }}
+                    >
+                      {item.isactive?.toString().toUpperCase()}
+                    </Typography>
+                    <ExpandMoreIcon />
+                  </>
+                }
                 aria-controls="panel1bh-content"
                 id="panel1bh-header"
                 style={{
