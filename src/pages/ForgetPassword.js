@@ -18,20 +18,25 @@ import Copyright from "../componenets/Copyright";
 
 const theme = createTheme();
 
-export default function SignInPage() {
+export default function ForgetPassword() {
+  const [forgotButton, setForgotButton] = React.useState(false);
   const [error, setError] = React.useState(false);
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { resetPassword } = useAuth();
 
-  const handleSubmit = async (event) => {
+  const handleForget = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    try {
-      await login(data.get("email"), data.get("password"));
-      navigate("/dashboard");
-    } catch {
+    if (data.get("email") !== "alex85excel@gmail.com") {
       setError(true);
-      console.log("Failed to Log In");
+      return;
+    }
+    try {
+      setForgotButton(true);
+      setError(false);
+      await resetPassword("alex85excel@gmail.com");
+    } catch {
+      console.log("Failed to Reset Password");
     }
   };
 
@@ -69,12 +74,12 @@ export default function SignInPage() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Welcome Alex, please Sign In
+              Forget Password
             </Typography>
             <Box
               component="form"
               noValidate
-              onSubmit={handleSubmit}
+              onSubmit={handleForget}
               sx={{ mt: 1 }}
             >
               <TextField
@@ -87,40 +92,43 @@ export default function SignInPage() {
                 autoComplete="email"
                 autoFocus
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              <Stack
-                style={{ display: error ? "" : "none" }}
-                sx={{ width: "100%" }}
-                spacing={2}
-              >
-                <Alert severity="error">
-                  <AlertTitle>Alex, These details are invalid ☹️</AlertTitle>
-                  If you lost your password, just click on{" "}
-                  <strong>Forgot Password</strong> below
-                </Alert>
-              </Stack>
               <Button
+                disabled={forgotButton}
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Let me In!
+                Send me Email
               </Button>
-              <Grid container>
+              <Button
+                onClick={() => navigate("/")}
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Back to Login
+              </Button>
+              <Grid style={{ display: forgotButton ? "" : "none" }} container>
                 <Grid item xs>
-                  <Button onClick={() => navigate("/forget")}>
-                    Forgot password?
-                  </Button>
+                  <Stack sx={{ width: "100%" }} spacing={2}>
+                    <Alert severity="success">
+                      <AlertTitle>Success 😀</AlertTitle>
+                      Password reset Instructions successfully sent on your
+                      email
+                    </Alert>
+                  </Stack>
+                </Grid>
+              </Grid>
+
+              <Grid style={{ display: error ? "" : "none" }} container>
+                <Grid item xs>
+                  <Stack sx={{ width: "100%" }} spacing={2}>
+                    <Alert severity="error">
+                      <AlertTitle>Failed ☹️</AlertTitle>
+                      Please enter the Valid Email.
+                    </Alert>
+                  </Stack>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />

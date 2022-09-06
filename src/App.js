@@ -7,6 +7,7 @@ import PrivateRoute from "./PrivateRoute";
 import PublishedSignals from "./pages/PublishedSignals";
 import UnpublishedSignals from "./pages/UnpublishedSignals";
 import UpdateData from "./pages/UpdateData";
+import ForgetPassword from "./pages/ForgetPassword";
 import { Provider, useDispatch } from "react-redux";
 import store from "./store/index";
 import { ref, onValue } from "firebase/database";
@@ -35,6 +36,7 @@ function App() {
         <AuthProvider>
           <Routes>
             <Route path="/" element={<SignInPage />} />
+            <Route path="/forget" element={<ForgetPassword />} />
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/publishedsignals" element={<PublishedSignals />} />
