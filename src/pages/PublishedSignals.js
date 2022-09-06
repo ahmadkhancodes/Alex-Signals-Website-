@@ -91,6 +91,17 @@ const PublishedSignalsComponent = () => {
                     >
                       {item.isactive?.toString().toUpperCase()}
                     </Typography>
+                    <Typography
+                      sx={{
+                        color: "white",
+                        paddingLeft: 2,
+                        paddingRight: 2,
+                        display: item.isactive === "closed" ? "" : "none",
+                        flexShrink: 0,
+                      }}
+                    >
+                      {item.isactive?.toString().toUpperCase()}
+                    </Typography>
                     <ExpandMoreIcon />
                   </>
                 }
