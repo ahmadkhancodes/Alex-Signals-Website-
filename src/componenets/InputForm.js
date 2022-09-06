@@ -27,6 +27,7 @@ export default function InputForm() {
   const [odat, setOdat] = React.useState("");
   const [cdat, setCdat] = React.useState("");
   const [rfip, setRfip] = React.useState("");
+  const [rl, setRl] = React.useState("");
 
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment);
@@ -54,6 +55,7 @@ export default function InputForm() {
         close_date_and_time: String(cdat),
         risk_factor_in_points: rfip,
         stop_loss: stoploss,
+        recommended_leverage: rl,
       })
     );
     dispatch(dataActions.saveToFirebase());
@@ -308,6 +310,18 @@ export default function InputForm() {
             value={rfip}
             onChange={(e) => setRfip(e.target.value)}
             label="RISK FACTOR IN POINTS"
+            fullWidth
+            autoComplete="family-name"
+            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id="rl"
+            name="rl"
+            value={rl}
+            onChange={(e) => setRl(e.target.value)}
+            label="RECOMMENDED LEVERAGE"
             fullWidth
             autoComplete="family-name"
             variant="standard"

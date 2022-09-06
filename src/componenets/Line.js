@@ -1,6 +1,6 @@
 import React from "react";
 
-function Line({ color }) {
+function Line({ color, display }) {
   return (
     <>
       <hr
@@ -9,6 +9,7 @@ function Line({ color }) {
           color: color,
           margin: 0,
           padding: 0,
+          display: display,
         }}
       />
     </>

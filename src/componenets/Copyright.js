@@ -12,7 +12,7 @@ const Copyright = (props) => {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://alexsignals.netlify.app/">
-        Alex Signals Website
+        Trading Markets
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}

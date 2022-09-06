@@ -67,7 +67,8 @@ const UnPublishedSignalsComponent = () => {
             item.profit === "" ||
             item.take_profit === "" ||
             item.open_date_and_time === "" ||
-            item.risk_factor_in_points === ""
+            item.risk_factor_in_points === "" ||
+            item.recommended_leverage === ""
         )
         .map((item) => (
           <>
@@ -108,49 +109,7 @@ const UnPublishedSignalsComponent = () => {
                     {item.open_price?.toString().toUpperCase()}
                   </Typography>
                 </Grid>
-                <Grid
-                  style={{
-                    display: item.close_price === "" ? "none" : "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    backgroundColor: "grey",
-                    padding: 10,
-                  }}
-                >
-                  <Typography color="white">Close Price</Typography>
-                  <Typography color="white">
-                    {item.close_price?.toString().toUpperCase()}
-                  </Typography>
-                </Grid>
-                <Line />
-                <Grid
-                  style={{
-                    display: item.profit === "" ? "none" : "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    backgroundColor: "grey",
-                    padding: 10,
-                  }}
-                >
-                  <Typography color="white">Profit</Typography>
-                  <Typography color="white">
-                    {item.profit?.toString().toUpperCase()}
-                  </Typography>
-                </Grid>
-                <Grid
-                  style={{
-                    display: item.take_profit === "" ? "none" : "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    padding: 10,
-                  }}
-                >
-                  <Typography>Take Profit</Typography>
-                  <Typography>
-                    {item.take_profit?.toString().toUpperCase()}
-                  </Typography>
-                </Grid>
-                <Line color="black" />
+                <Line display={item.stop_loss === "" ? "none" : ""} />
                 <Grid
                   style={{
                     display: item.stop_loss === "" ? "none" : "flex",
@@ -164,6 +123,80 @@ const UnPublishedSignalsComponent = () => {
                     {item.stop_loss?.toString().toUpperCase()}
                   </Typography>
                 </Grid>
+                <Line display={item.take_profit === "" ? "none" : ""} />
+                <Grid
+                  style={{
+                    display: item.take_profit === "" ? "none" : "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    padding: 10,
+                  }}
+                >
+                  <Typography>Take Profit</Typography>
+                  <Typography>
+                    {item.take_profit?.toString().toUpperCase()}
+                  </Typography>
+                </Grid>
+                <Grid
+                  style={{
+                    display:
+                      item.risk_factor_in_points === "" ? "none" : "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    backgroundColor: "#c23e06",
+                    padding: 10,
+                  }}
+                >
+                  <Typography color="black">Risk factor in points</Typography>
+                  <Typography color="black">
+                    {item.risk_factor_in_points}
+                  </Typography>
+                </Grid>
+                <Line
+                  display={item.risk_factor_in_points === "" ? "none" : ""}
+                />
+                <Grid
+                  style={{
+                    display:
+                      item.risk_factor_in_points === "" ? "none" : "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    backgroundColor: "#c23e06",
+                    padding: 10,
+                  }}
+                >
+                  <Typography color="black">Recommended Leverage</Typography>
+                  <Typography color="black">
+                    {item.recommended_leverage}
+                  </Typography>
+                </Grid>
+                <Grid
+                  style={{
+                    display: item.close_price === "" ? "none" : "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    padding: 10,
+                  }}
+                >
+                  <Typography color="black">Close Price</Typography>
+                  <Typography color="black">
+                    {item.close_price?.toString().toUpperCase()}
+                  </Typography>
+                </Grid>
+                <Line display={item.profit === "" ? "none" : ""} />
+                <Grid
+                  style={{
+                    display: item.profit === "" ? "none" : "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    padding: 10,
+                  }}
+                >
+                  <Typography color="black">Profit</Typography>
+                  <Typography color="black">
+                    {item.profit?.toString().toUpperCase()}
+                  </Typography>
+                </Grid>
                 <Grid
                   style={{
                     display:
@@ -173,7 +206,7 @@ const UnPublishedSignalsComponent = () => {
                         : "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
-                    backgroundColor: "#080200",
+                    backgroundColor: "grey",
                     padding: 10,
                   }}
                 >
@@ -182,7 +215,7 @@ const UnPublishedSignalsComponent = () => {
                     {item.open_date_and_time}
                   </Typography>
                 </Grid>
-                <Line />
+                <Line display={item.close_date_and_time === "" ? "none" : ""} />
                 <Grid
                   style={{
                     display:
@@ -192,29 +225,13 @@ const UnPublishedSignalsComponent = () => {
                         : "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
-                    backgroundColor: "#080200",
+                    backgroundColor: "grey",
                     padding: 10,
                   }}
                 >
                   <Typography color="white">Close Time</Typography>
                   <Typography color="white" style={{ textAlign: "end" }}>
                     {item.close_date_and_time}
-                  </Typography>
-                </Grid>
-                <Line />
-                <Grid
-                  style={{
-                    display:
-                      item.risk_factor_in_points === "" ? "none" : "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    backgroundColor: "grey",
-                    padding: 10,
-                  }}
-                >
-                  <Typography color="white">Risk factor in points</Typography>
-                  <Typography color="white">
-                    {item.risk_factor_in_points}
                   </Typography>
                 </Grid>
                 <Grid

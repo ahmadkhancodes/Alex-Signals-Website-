@@ -28,6 +28,7 @@ export default function UpdateInputForm({ data }) {
   const [odat, setOdat] = React.useState(data && data.open_date_and_time);
   const [cdat, setCdat] = React.useState(data && data.close_date_and_time);
   const [rfip, setRfip] = React.useState(data && data.risk_factor_in_points);
+  const [rl, setRl] = React.useState(data && data.recommended_leverage);
 
   const setActive = (input) => {
     setSelected2(input);
@@ -57,6 +58,7 @@ export default function UpdateInputForm({ data }) {
         close_date_and_time: String(cdat),
         risk_factor_in_points: rfip,
         stop_loss: stoploss,
+        recommended_leverage: rl,
       })
     );
     dispatch(dataActions.saveToFirebase());
@@ -310,6 +312,18 @@ export default function UpdateInputForm({ data }) {
             value={rfip}
             onChange={(e) => setRfip(e.target.value)}
             label="RISK FACTOR IN POINTS"
+            fullWidth
+            autoComplete="family-name"
+            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id="rl"
+            name="rl"
+            value={rl}
+            onChange={(e) => setRl(e.target.value)}
+            label="RECOMMENDED LEVERAGE"
             fullWidth
             autoComplete="family-name"
             variant="standard"

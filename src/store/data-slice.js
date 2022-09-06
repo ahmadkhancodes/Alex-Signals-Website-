@@ -42,6 +42,8 @@ const dataSlice = createSlice({
           state.allData[i]["risk_factor_in_points"] =
             actions.payload?.risk_factor_in_points;
           state.allData[i]["stop_loss"] = actions.payload?.stop_loss;
+          state.allData[i]["recommended_leverage"] =
+            actions.payload?.recommended_leverage;
         }
       }
     },

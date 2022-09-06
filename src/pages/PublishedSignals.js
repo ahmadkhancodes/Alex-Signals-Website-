@@ -67,7 +67,8 @@ const PublishedSignalsComponent = () => {
             item.take_profit !== "" &&
             item.stop_loss !== "" &&
             item.open_date_and_time !== "" &&
-            item.risk_factor_in_points !== ""
+            item.risk_factor_in_points !== "" &&
+            item.recommended_leverage !== ""
         )
         .map((item) => (
           <>
@@ -81,8 +82,8 @@ const PublishedSignalsComponent = () => {
                   <>
                     <Typography
                       sx={{
-                        color: "white",
-                        backgroundColor: "blue",
+                        color: "black",
+                        backgroundColor: "#f0bf0e",
                         paddingLeft: 2,
                         paddingRight: 2,
                         display: item.isactive === "active" ? "" : "none",
@@ -135,49 +136,7 @@ const PublishedSignalsComponent = () => {
                     {item.open_price?.toString().toUpperCase()}
                   </Typography>
                 </Grid>
-                <Grid
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    backgroundColor: "grey",
-                    padding: 10,
-                  }}
-                >
-                  <Typography color="white">Close Price</Typography>
-                  <Typography color="white">
-                    {item.close_price?.toString().toUpperCase()}
-                  </Typography>
-                </Grid>
                 <Line />
-                <Grid
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    backgroundColor: "grey",
-                    padding: 10,
-                  }}
-                >
-                  <Typography color="white">Profit</Typography>
-                  <Typography color="white">
-                    {item.profit?.toString().toUpperCase()}
-                  </Typography>
-                </Grid>
-                <Grid
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    padding: 10,
-                  }}
-                >
-                  <Typography>Take Profit</Typography>
-                  <Typography>
-                    {item.take_profit?.toString().toUpperCase()}
-                  </Typography>
-                </Grid>
-                <Line color="black" />
                 <Grid
                   style={{
                     display: "flex",
@@ -191,18 +150,32 @@ const PublishedSignalsComponent = () => {
                     {item.stop_loss?.toString().toUpperCase()}
                   </Typography>
                 </Grid>
+                <Line />
                 <Grid
                   style={{
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
-                    backgroundColor: "#080200",
                     padding: 10,
                   }}
                 >
-                  <Typography color="white">Open Time</Typography>
-                  <Typography color="white" style={{ textAlign: "end" }}>
-                    {item.open_date_and_time}
+                  <Typography>Take Profit</Typography>
+                  <Typography>
+                    {item.take_profit?.toString().toUpperCase()}
+                  </Typography>
+                </Grid>
+                <Grid
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    backgroundColor: "#c23e06",
+                    padding: 10,
+                  }}
+                >
+                  <Typography color="black">Risk factor in points</Typography>
+                  <Typography color="black">
+                    {item.risk_factor_in_points}
                   </Typography>
                 </Grid>
                 <Line />
@@ -211,13 +184,55 @@ const PublishedSignalsComponent = () => {
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
-                    backgroundColor: "#080200",
+                    backgroundColor: "#c23e06",
                     padding: 10,
                   }}
                 >
-                  <Typography color="white">Close Time</Typography>
-                  <Typography color="white" style={{ textAlign: "end" }}>
-                    {item.close_date_and_time}
+                  <Typography color="black">Recommended Leverage</Typography>
+                  <Typography color="black">
+                    {item.recommended_leverage}
+                  </Typography>
+                </Grid>
+                <Line />
+                <Grid
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    padding: 10,
+                  }}
+                >
+                  <Typography>Close Price</Typography>
+                  <Typography>
+                    {item.close_price?.toString().toUpperCase()}
+                  </Typography>
+                </Grid>
+                <Line />
+                <Grid
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    padding: 10,
+                  }}
+                >
+                  <Typography>Profit</Typography>
+                  <Typography>
+                    {item.profit?.toString().toUpperCase()}
+                  </Typography>
+                </Grid>
+                <Grid
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    backgroundColor: "grey",
+                    padding: 10,
+                  }}
+                >
+                  <Typography color="black">Open Time</Typography>
+                  <Typography color="black" style={{ textAlign: "end" }}>
+                    {item.open_date_and_time}
                   </Typography>
                 </Grid>
                 <Line />
@@ -230,11 +245,12 @@ const PublishedSignalsComponent = () => {
                     padding: 10,
                   }}
                 >
-                  <Typography color="white">Risk factor in points</Typography>
-                  <Typography color="white">
-                    {item.risk_factor_in_points}
+                  <Typography color="black">Close Time</Typography>
+                  <Typography color="black" style={{ textAlign: "end" }}>
+                    {item.close_date_and_time}
                   </Typography>
                 </Grid>
+                <Line />
                 <Grid
                   style={{
                     marginTop: 10,
