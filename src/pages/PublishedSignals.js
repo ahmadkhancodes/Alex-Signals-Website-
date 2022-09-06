@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import DashboardComponent from "../componenets/DashboardComponent";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -10,13 +10,47 @@ import { Grid } from "@mui/material";
 import Line from "../componenets/Line";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { dataActions } from "../store/data-slice";
 
 const PublishedSignalsComponent = () => {
+  const dispatch = useDispatch();
   var data = useSelector((state) => state.data.allData);
   const navigate = useNavigate();
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
+  };
+
+  const getData = (id) => {
+    var newItem = {};
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].id === id) {
+        newItem = { ...data[i] };
+      }
+    }
+    return newItem;
+  };
+
+  const deleteData = (item) => {
+    var dataCopy = [...data];
+    dataCopy.splice(dataCopy.indexOf(item), 1);
+    dispatch(dataActions.setAllData(dataCopy));
+    dispatch(dataActions.saveToFirebase());
+  };
+
+  const duplicateData = (id) => {
+    var newItem = {};
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].id === id) {
+        newItem = { ...data[i] };
+      }
+    }
+    newItem["id"] = Date.now();
+    console.log(newItem);
+    var dataCopy = [...data];
+    dataCopy.push(newItem);
+    dispatch(dataActions.setAllData(dataCopy));
+    dispatch(dataActions.saveToFirebase());
   };
 
   return (
@@ -171,7 +205,9 @@ const PublishedSignalsComponent = () => {
                     variant="contained"
                     color="info"
                     style={{ width: "32%" }}
-                    onClick={() => navigate("/updatedata", { state: item })}
+                    onClick={() =>
+                      navigate("/updatedata", { state: getData(item.id) })
+                    }
                   >
                     Update
                   </Button>
@@ -179,6 +215,7 @@ const PublishedSignalsComponent = () => {
                     variant="contained"
                     color="success"
                     style={{ width: "32%" }}
+                    onClick={() => duplicateData(item.id)}
                   >
                     Duplicate
                   </Button>
@@ -186,7 +223,7 @@ const PublishedSignalsComponent = () => {
                     variant="contained"
                     color="error"
                     style={{ width: "32%" }}
-                    // onClick={() => deleteData(item.id)}
+                    onClick={() => deleteData(item)}
                   >
                     Delete
                   </Button>

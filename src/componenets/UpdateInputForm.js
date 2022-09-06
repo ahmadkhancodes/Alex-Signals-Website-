@@ -6,28 +6,25 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Button from "@mui/material/Button";
 import { dataActions } from "../store/data-slice";
-import { useDispatch, useSelector } from "react-redux";
-import { set, ref } from "firebase/database";
-import { db } from "../firebase";
+import { useDispatch } from "react-redux";
 
 export default function UpdateInputForm({ data }) {
-  var DATA_FROM_STORE = useSelector((state) => state.data.allData);
+  const id = data.id;
   const dispatch = useDispatch();
-  const id = data && data.id;
   const [alignment, setAlignment] = React.useState();
   const [alignment2, setAlignment2] = React.useState();
   //Form Data states
   const [selected, setSelected] = React.useState(data && data.action);
   const [selected2, setSelected2] = React.useState(data && data.isactive);
   const [instrument, setInstrument] = React.useState(data && data.instrument);
-  const [openprice, setOpenprice] = React.useState(data && data.openprice);
-  const [closeprice, setCloseprice] = React.useState(data && data.closeprice);
+  const [openprice, setOpenprice] = React.useState(data && data.open_price);
+  const [closeprice, setCloseprice] = React.useState(data && data.close_price);
   const [profit, setProfit] = React.useState(data && data.profit);
-  const [takeprofit, setTakeprofit] = React.useState(data && data.takeprofit);
-  const [stoploss, setStoploss] = React.useState(data && data.stoploss);
-  const [odat, setOdat] = React.useState(data && data.odat);
-  const [cdat, setCdat] = React.useState(data && data.cdat);
-  const [rfip, setRfip] = React.useState(data && data.rfip);
+  const [takeprofit, setTakeprofit] = React.useState(data && data.take_profit);
+  const [stoploss, setStoploss] = React.useState(data && data.stop_loss);
+  const [odat, setOdat] = React.useState(data && data.open_date_and_time);
+  const [cdat, setCdat] = React.useState(data && data.close_date_and_time);
+  const [rfip, setRfip] = React.useState(data && data.risk_factor_in_points);
 
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment);
@@ -47,28 +44,24 @@ export default function UpdateInputForm({ data }) {
   };
 
   const handleSubmit = async () => {
-    const data = DATA_FROM_STORE.find((item) => item.id === id);
-    data["action"] = selected;
-    data["instrument"] = instrument;
-    data["isactive"] = selected2;
-    data["open_price"] = openprice;
-    data["close_price"] = closeprice;
-    data["profit"] = profit;
-    data["take_profit"] = takeprofit;
-    data["open_date_and_time"] = String(odat);
-    data["close_date_and_time"] = String(cdat);
-    data["risk_factor_in_points"] = rfip;
-    data["stop_loss"] = stoploss;
-    dispatch(dataActions.setAllData(DATA_FROM_STORE));
+    dispatch(
+      dataActions.updateData({
+        id: id,
+        action: selected,
+        instrument: instrument,
+        isactive: selected2,
+        open_price: openprice,
+        close_price: closeprice,
+        profit: profit,
+        take_profit: takeprofit,
+        open_date_and_time: String(odat),
+        close_date_and_time: String(cdat),
+        risk_factor_in_points: rfip,
+        stop_loss: stoploss,
+      })
+    );
+    dispatch(dataActions.saveToFirebase());
   };
-
-  React.useEffect(() => {
-    // Storing Data into Firebase
-    set(ref(db, "/data"), {
-      DATA_FROM_STORE,
-    });
-  }, [DATA_FROM_STORE]);
-
   return (
     <React.Fragment>
       <Grid container spacing={6}>

@@ -10,6 +10,8 @@ const firebaseConfig = {
   storageBucket: "alex-signals.appspot.com",
   messagingSenderId: "662576775245",
   appId: "1:662576775245:web:a11bc5da66c2c1e5655c04",
+  databaseURL:
+    "https://alex-signals-default-rtdb.europe-west1.firebasedatabase.app",
 };
 
 // Initialize Firebase

@@ -5,13 +5,10 @@ import TextField from "@mui/material/TextField";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Button from "@mui/material/Button";
-import { set, ref } from "firebase/database";
-import { db } from "../firebase";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { dataActions } from "../store/data-slice";
 
 export default function InputForm() {
-  var DATA_FROM_STORE = useSelector((state) => state.data.allData);
   const dispatch = useDispatch();
   const [alignment, setAlignment] = React.useState();
   const [alignment2, setAlignment2] = React.useState();
@@ -45,17 +42,10 @@ export default function InputForm() {
     setAlignment2(newAlignment);
   };
 
-  React.useEffect(() => {
-    // Storing Data into Firebase
-    set(ref(db, "/data"), {
-      DATA_FROM_STORE,
-    }).catch((err) => console.log(err));
-  }, [DATA_FROM_STORE]);
-
   const handleSubmit = async () => {
     dispatch(
       dataActions.addData({
-        id: DATA_FROM_STORE.length + 1,
+        id: Date.now(),
         action: selected,
         instrument: instrument,
         isactive: selected2,
@@ -69,6 +59,7 @@ export default function InputForm() {
         stop_loss: stoploss,
       })
     );
+    dispatch(dataActions.saveToFirebase());
   };
 
   return (

@@ -7,7 +7,7 @@ import PrivateRoute from "./PrivateRoute";
 import PublishedSignals from "./pages/PublishedSignals";
 import UnpublishedSignals from "./pages/UnpublishedSignals";
 import UpdateData from "./pages/UpdateData";
-import { Provider, useDispatch, useSelector } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import store from "./store/index";
 import { ref, onValue } from "firebase/database";
 import { db } from "./firebase";
@@ -16,15 +16,19 @@ import { dataActions } from "./store/data-slice";
 function App() {
   const dispatch = useDispatch();
   React.useEffect(() => {
-    console.log("IN");
     onValue(ref(db), (snapshot) => {
-      const data = snapshot.val() || {};
+      const data = snapshot.val();
       if (data !== null) {
-        dispatch(dataActions.setAllData(data));
-        console.log("All Data Fetched from APP.JS");
+        var arr = [];
+        console.log(data["DATA_FROM_STORE"]);
+        for (let i = 0; i < data["DATA_FROM_STORE"].length; i++) {
+          arr.push(data["DATA_FROM_STORE"][i]);
+        }
+        dispatch(dataActions.setAllData(arr));
       }
+      console.log("DATA fetched from APP.JS");
     });
-  }, []);
+  });
   return (
     <div>
       <Router>
