@@ -82,7 +82,7 @@ const PublishedSignalsComponent = () => {
                     <Typography
                       sx={{
                         color: "white",
-                        backgroundColor: "#cfae0a",
+                        backgroundColor: "blue",
                         paddingLeft: 2,
                         paddingRight: 2,
                         display: item.isactive === "active" ? "" : "none",
