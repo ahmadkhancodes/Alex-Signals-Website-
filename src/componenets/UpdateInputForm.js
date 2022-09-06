@@ -39,6 +39,7 @@ export default function UpdateInputForm({ data }) {
   const setActive = (input) => {
     setSelected2(input);
     setCdat();
+    setCdat_issued();
   };
 
   const setOdat_func = (input) => {

@@ -50,6 +50,7 @@ export default function InputForm() {
   const setActive = (input) => {
     setSelected2(input);
     setCdat();
+    setCdat_issued();
   };
   const handleSubmit = async () => {
     dispatch(
