@@ -7,8 +7,10 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
 import { dataActions } from "../store/data-slice";
+import { useNavigate } from "react-router-dom";
 
 export default function InputForm() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [alignment, setAlignment] = React.useState();
   const [alignment2, setAlignment2] = React.useState();
@@ -60,6 +62,7 @@ export default function InputForm() {
       })
     );
     dispatch(dataActions.saveToFirebase());
+    navigate("/publishedsignals");
   };
 
   return (
