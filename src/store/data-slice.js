@@ -44,6 +44,8 @@ const dataSlice = createSlice({
           state.allData[i]["stop_loss"] = actions.payload?.stop_loss;
           state.allData[i]["recommended_leverage"] =
             actions.payload?.recommended_leverage;
+          state.allData[i]["odat_issued"] = actions.payload?.odat_issued;
+          state.allData[i]["cdat_issued"] = actions.payload?.cdat_issued;
         }
       }
     },

@@ -29,10 +29,26 @@ export default function UpdateInputForm({ data }) {
   const [cdat, setCdat] = React.useState(data && data.close_date_and_time);
   const [rfip, setRfip] = React.useState(data && data.risk_factor_in_points);
   const [rl, setRl] = React.useState(data && data.recommended_leverage);
+  const [odat_issued, setOdat_issued] = React.useState(
+    data && data.odat_issued
+  );
+  const [cdat_issued, setCdat_issued] = React.useState(
+    data && data.cdat_issued
+  );
 
   const setActive = (input) => {
     setSelected2(input);
     setCdat();
+  };
+
+  const setOdat_func = (input) => {
+    setOdat(input);
+    setOdat_issued(new Date());
+  };
+
+  const setCdat_func = (input) => {
+    setCdat(input);
+    setCdat_issued(new Date());
   };
 
   const handleAlignment = (event, newAlignment) => {
@@ -59,6 +75,8 @@ export default function UpdateInputForm({ data }) {
         risk_factor_in_points: rfip,
         stop_loss: stoploss,
         recommended_leverage: rl,
+        odat_issued: odat_issued,
+        cdat_issued: cdat_issued,
       })
     );
     dispatch(dataActions.saveToFirebase());
@@ -291,7 +309,7 @@ export default function UpdateInputForm({ data }) {
             id="odat"
             name="odat"
             value={odat}
-            onChange={(value) => setOdat(value)}
+            onChange={(value) => setOdat_func(value)}
             renderInput={(params) => <TextField {...params} />}
           />
         </Grid>
@@ -301,7 +319,7 @@ export default function UpdateInputForm({ data }) {
             id="cdat"
             name="cdat"
             value={cdat}
-            onChange={(value) => setCdat(value)}
+            onChange={(value) => setCdat_func(value)}
             renderInput={(params) => <TextField {...params} />}
           />
         </Grid>

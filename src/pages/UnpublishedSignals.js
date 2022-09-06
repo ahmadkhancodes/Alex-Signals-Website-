@@ -31,6 +31,17 @@ const UnPublishedSignalsComponent = () => {
     return newItem;
   };
 
+  function diff_hours(dt2) {
+    if (dt2 === "") {
+      return "";
+    }
+    dt2 = new Date(dt2);
+    var dt1 = new Date();
+    var diff = (dt2.getTime() - dt1.getTime()) / 1000;
+    diff /= 60 * 60;
+    return Math.abs(Math.round(diff));
+  }
+
   const deleteData = (item) => {
     var dataCopy = [...data];
     dataCopy.splice(dataCopy.indexOf(item), 1);
@@ -212,7 +223,8 @@ const UnPublishedSignalsComponent = () => {
                 >
                   <Typography color="white">Open Time</Typography>
                   <Typography color="white" style={{ textAlign: "end" }}>
-                    {item.open_date_and_time}
+                    {item.open_date_and_time} {diff_hours(item.odat_issued)}{" "}
+                    hours ago
                   </Typography>
                 </Grid>
                 <Line display={item.close_date_and_time === "" ? "none" : ""} />
@@ -231,7 +243,8 @@ const UnPublishedSignalsComponent = () => {
                 >
                   <Typography color="white">Close Time</Typography>
                   <Typography color="white" style={{ textAlign: "end" }}>
-                    {item.close_date_and_time}
+                    {item.close_date_and_time} {diff_hours(item.cdat_issued)}{" "}
+                    hours ago
                   </Typography>
                 </Grid>
                 <Grid
