@@ -11,6 +11,9 @@ import Line from "../componenets/Line";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { dataActions } from "../store/data-slice";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogTitle from "@mui/material/DialogTitle";
 
 const PublishedSignalsComponent = () => {
   const dispatch = useDispatch();
@@ -19,6 +22,16 @@ const PublishedSignalsComponent = () => {
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
+  };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   function diff_hours(dt2) {
@@ -47,6 +60,7 @@ const PublishedSignalsComponent = () => {
     dataCopy.splice(dataCopy.indexOf(item), 1);
     dispatch(dataActions.setAllData(dataCopy));
     dispatch(dataActions.saveToFirebase());
+    handleClose();
   };
 
   const duplicateData = (id) => {
@@ -293,7 +307,7 @@ const PublishedSignalsComponent = () => {
                     variant="contained"
                     color="error"
                     style={{ width: "32%" }}
-                    onClick={() => deleteData(item)}
+                    onClick={handleClickOpen}
                   >
                     Delete
                   </Button>
@@ -301,6 +315,22 @@ const PublishedSignalsComponent = () => {
               </AccordionDetails>
             </Accordion>
             <Line />
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">
+                {`Are you sure you want to delete ${item.instrument}?`}
+              </DialogTitle>
+              <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={() => deleteData(item)} autoFocus>
+                  Confirm Delete
+                </Button>
+              </DialogActions>
+            </Dialog>
           </>
         ))}
     </Grid>
