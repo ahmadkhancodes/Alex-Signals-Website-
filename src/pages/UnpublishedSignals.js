@@ -223,8 +223,8 @@ const UnPublishedSignalsComponent = () => {
                 >
                   <Typography color="white">Open Time</Typography>
                   <Typography color="white" style={{ textAlign: "end" }}>
-                    {item.open_date_and_time} {diff_hours(item.odat_issued)}{" "}
-                    hours ago
+                    {diff_hours(item.odat_issued)} hours ago <br />
+                    {item.open_date_and_time.slice(0, 33)}
                   </Typography>
                 </Grid>
                 <Line display={item.close_date_and_time === "" ? "none" : ""} />
@@ -243,8 +243,8 @@ const UnPublishedSignalsComponent = () => {
                 >
                   <Typography color="white">Close Time</Typography>
                   <Typography color="white" style={{ textAlign: "end" }}>
-                    {item.close_date_and_time} {diff_hours(item.cdat_issued)}{" "}
-                    hours ago
+                    {diff_hours(item.cdat_issued)} hours ago <br />
+                    {item.close_date_and_time.slice(0, 33)}
                   </Typography>
                 </Grid>
                 <Grid

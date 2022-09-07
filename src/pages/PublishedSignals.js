@@ -243,8 +243,8 @@ const PublishedSignalsComponent = () => {
                 >
                   <Typography color="black">Open Time</Typography>
                   <Typography color="black" style={{ textAlign: "end" }}>
-                    {item.open_date_and_time} {diff_hours(item.odat_issued)}{" "}
-                    hours ago
+                    {diff_hours(item.odat_issued)} hours ago <br />
+                    {item.open_date_and_time.slice(0, 33)}
                   </Typography>
                 </Grid>
                 <Line />
@@ -259,8 +259,8 @@ const PublishedSignalsComponent = () => {
                 >
                   <Typography color="black">Close Time</Typography>
                   <Typography color="black" style={{ textAlign: "end" }}>
-                    {item.close_date_and_time} {diff_hours(item.cdat_issued)}{" "}
-                    hours ago
+                    {diff_hours(item.cdat_issued)} hours ago <br />
+                    {item.close_date_and_time.slice(0, 33)}
                   </Typography>
                 </Grid>
                 <Line />
