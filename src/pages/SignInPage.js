@@ -69,7 +69,7 @@ export default function SignInPage() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Welcome Alex, please Sign In
+              Welcome to Trading Markets, please Sign In
             </Typography>
             <Box
               component="form"
@@ -103,7 +103,7 @@ export default function SignInPage() {
                 spacing={2}
               >
                 <Alert severity="error">
-                  <AlertTitle>Alex, These details are invalid ☹️</AlertTitle>
+                  <AlertTitle>These details are invalid ☹️</AlertTitle>
                   If you lost your password, just click on{" "}
                   <strong>Forgot Password</strong> below
                 </Alert>

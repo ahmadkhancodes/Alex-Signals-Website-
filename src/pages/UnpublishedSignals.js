@@ -75,7 +75,7 @@ const UnPublishedSignalsComponent = () => {
     dispatch(dataActions.setAllData(dataCopy));
     dispatch(dataActions.saveToFirebase());
   };
-
+  var count = 1;
   return (
     <Grid container spacing={1}>
       {data
@@ -107,15 +107,41 @@ const UnPublishedSignalsComponent = () => {
                 style={{
                   backgroundColor:
                     item.action?.toString() === "buy" ? "green" : "red",
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignItems: "space-evenly",
                 }}
               >
                 <Typography
                   sx={{ width: "33%", flexShrink: 0, color: "white" }}
                 >
-                  {item.action?.toString().toUpperCase()}
+                  {count}) {item.action?.toString().toUpperCase()}
                 </Typography>
-                <Typography sx={{ color: "white" }}>
+                <Typography sx={{ color: "white", width: "33%" }}>
                   {item.instrument?.toString().toUpperCase()}
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "white",
+                    paddingLeft: 2,
+                    display: item.isactive === "closed" ? "" : "none",
+                    flexShrink: 0,
+                    width: "33%",
+                  }}
+                >
+                  {item.isactive?.toString().toUpperCase()}
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "black",
+                    backgroundColor: "#f0bf0e",
+                    display: item.isactive === "active" ? "" : "none",
+                    flexShrink: 0,
+                    width: "18%",
+                    textAlign: "center",
+                  }}
+                >
+                  {item.isactive?.toString().toUpperCase()}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -235,7 +261,7 @@ const UnPublishedSignalsComponent = () => {
                 >
                   <Typography color="white">Open Time</Typography>
                   <Typography color="white" style={{ textAlign: "end" }}>
-                    {diff_hours(item.odat_issued)} hours ago <br />
+                    {diff_hours(item.open_date_and_time)} hours ago <br />
                     {item.open_date_and_time.slice(0, 33)}
                   </Typography>
                 </Grid>
@@ -255,7 +281,7 @@ const UnPublishedSignalsComponent = () => {
                 >
                   <Typography color="white">Close Time</Typography>
                   <Typography color="white" style={{ textAlign: "end" }}>
-                    {diff_hours(item.cdat_issued)} hours ago <br />
+                    {diff_hours(item.close_date_and_time)} hours ago <br />
                     {item.close_date_and_time.slice(0, 33)}
                   </Typography>
                 </Grid>
