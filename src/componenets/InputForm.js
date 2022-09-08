@@ -73,7 +73,7 @@ export default function InputForm() {
       })
     );
     dispatch(dataActions.saveToFirebase());
-    navigate("/publishedsignals");
+    navigate("/tableofcontent");
   };
 
   return (
