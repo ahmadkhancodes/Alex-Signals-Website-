@@ -263,6 +263,18 @@ export default function UpdateInputForm({ data }) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
+            id="stoploss"
+            name="stoploss"
+            value={stoploss}
+            onChange={(e) => setStoploss(e.target.value)}
+            label="STOP LOSS"
+            fullWidth
+            autoComplete="family-name"
+            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
             id="profit"
             name="profit"
             value={profit}
@@ -273,25 +285,13 @@ export default function UpdateInputForm({ data }) {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12}>
           <TextField
             id="takeprofit"
             name="takeprofit"
             value={takeprofit}
             onChange={(e) => setTakeprofit(e.target.value)}
             label="TAKE PROFIT"
-            fullWidth
-            autoComplete="family-name"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <TextField
-            id="stoploss"
-            name="stoploss"
-            value={stoploss}
-            onChange={(e) => setStoploss(e.target.value)}
-            label="STOP LOSS"
             fullWidth
             autoComplete="family-name"
             variant="standard"

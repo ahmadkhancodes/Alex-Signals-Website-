@@ -174,12 +174,12 @@ const UnPublishedSignalsComponent = () => {
                   display: item.risk_factor_in_points === "" ? "none" : "flex",
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  backgroundColor: "#c23e06",
+                  backgroundColor: "black",
                   padding: 10,
                 }}
               >
-                <Typography color="black">Risk factor in points</Typography>
-                <Typography color="black">
+                <Typography color="white">Risk factor in points</Typography>
+                <Typography color="white">
                   {item.risk_factor_in_points}
                 </Typography>
               </Grid>
@@ -189,12 +189,12 @@ const UnPublishedSignalsComponent = () => {
                   display: item.risk_factor_in_points === "" ? "none" : "flex",
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  backgroundColor: "#c23e06",
+                  backgroundColor: "black",
                   padding: 10,
                 }}
               >
-                <Typography color="black">Recommended Leverage</Typography>
-                <Typography color="black">
+                <Typography color="white">Recommended Leverage</Typography>
+                <Typography color="white">
                   {item.recommended_leverage}
                 </Typography>
               </Grid>
