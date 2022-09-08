@@ -59,6 +59,7 @@ const UnPublishedSignalsComponent = () => {
     dataCopy.splice(dataCopy.indexOf(item), 1);
     dispatch(dataActions.setAllData(dataCopy));
     dispatch(dataActions.saveToFirebase());
+    handleClose();
   };
 
   const duplicateData = (id) => {
