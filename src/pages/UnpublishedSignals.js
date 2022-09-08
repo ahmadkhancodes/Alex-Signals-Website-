@@ -25,6 +25,30 @@ const UnPublishedSignalsComponent = () => {
     setExpanded(isExpanded ? panel : false);
   };
 
+  const addZero = (d) => {
+    if (String(d).length === 1) {
+      return `0${d}`;
+    }
+    return d;
+  };
+
+  const formatDate = (d) => {
+    var date = new Date(d);
+    return (
+      date.getFullYear() +
+      "-" +
+      addZero(date.getMonth() + 1) +
+      "-" +
+      addZero(date.getDate()) +
+      " " +
+      addZero(date.getHours()) +
+      ":" +
+      addZero(date.getMinutes()) +
+      ":" +
+      addZero(date.getSeconds())
+    );
+  };
+
   const getData = (id) => {
     var newItem = {};
     for (let i = 0; i < data.length; i++) {
@@ -43,6 +67,7 @@ const UnPublishedSignalsComponent = () => {
     var dt1 = new Date();
     var diff = (dt2.getTime() - dt1.getTime()) / 1000;
     diff /= 60 * 60;
+    console.log(Math.abs(Math.round(diff)));
     return Math.abs(Math.round(diff));
   }
 
@@ -242,7 +267,7 @@ const UnPublishedSignalsComponent = () => {
                 <Typography color="white">Open Time</Typography>
                 <Typography color="white" style={{ textAlign: "end" }}>
                   {diff_hours(item.open_date_and_time)} hours ago <br />
-                  {item.open_date_and_time.slice(0, 33)}
+                  {formatDate(item.open_date_and_time)}
                 </Typography>
               </Grid>
               <Line display={item.close_date_and_time === "" ? "none" : ""} />
@@ -262,7 +287,7 @@ const UnPublishedSignalsComponent = () => {
                 <Typography color="white">Close Time</Typography>
                 <Typography color="white" style={{ textAlign: "end" }}>
                   {diff_hours(item.close_date_and_time)} hours ago <br />
-                  {item.close_date_and_time.slice(0, 33)}
+                  {formatDate(item.close_date_and_time)}
                 </Typography>
               </Grid>
               <Grid
