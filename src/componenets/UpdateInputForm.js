@@ -81,7 +81,7 @@ export default function UpdateInputForm({ data }) {
       })
     );
     dispatch(dataActions.saveToFirebase());
-    navigate("/publishedsignals");
+    navigate("/tableofcontent");
   };
   return (
     <React.Fragment>

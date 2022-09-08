@@ -4,7 +4,6 @@ import Dashboard from "./pages/Dashboard";
 import { AuthProvider } from "./context/AuthContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
-import PublishedSignals from "./pages/PublishedSignals";
 import UnpublishedSignals from "./pages/UnpublishedSignals";
 import UpdateData from "./pages/UpdateData";
 import ForgetPassword from "./pages/ForgetPassword";
@@ -41,11 +40,7 @@ function App() {
             <Route path="/forget" element={<ForgetPassword />} />
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/publishedsignals" element={<PublishedSignals />} />
-              <Route
-                path="/unpublishedsignals"
-                element={<UnpublishedSignals />}
-              />
+              <Route path="/tableofcontent" element={<UnpublishedSignals />} />
               <Route path="/updatedata" element={<UpdateData />} />
             </Route>
           </Routes>
