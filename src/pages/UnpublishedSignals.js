@@ -137,7 +137,7 @@ const UnPublishedSignalsComponent = () => {
                     backgroundColor: "#f0bf0e",
                     display: item.isactive === "active" ? "" : "none",
                     flexShrink: 0,
-                    width: "18%",
+                    width: "22%",
                     textAlign: "center",
                   }}
                 >
