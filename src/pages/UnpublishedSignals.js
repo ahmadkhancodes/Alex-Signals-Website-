@@ -32,6 +32,60 @@ const UnPublishedSignalsComponent = () => {
     return d;
   };
 
+  const diff_hours = (dt2) => {
+    if (dt2 === "") {
+      return "";
+    }
+    var dateNow = new Date();
+    dt2 = new Date(dt2);
+    var seconds = Math.floor((dateNow - dt2) / 1000);
+    var minutes = Math.floor(seconds / 60);
+    var hours = Math.floor(minutes / 60);
+    var days = Math.floor(hours / 24);
+
+    hours = hours - days * 24;
+    minutes = minutes - days * 24 * 60 - hours * 60;
+    seconds = seconds - days * 24 * 60 * 60 - hours * 60 * 60 - minutes * 60;
+    return (
+      addZero(hours) +
+      "hours " +
+      addZero(minutes) +
+      "mins " +
+      addZero(seconds) +
+      "sec ago"
+    );
+  };
+
+  const getData = (id) => {
+    var newItem = {};
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].id === id) {
+        newItem = { ...data[i] };
+      }
+    }
+    return newItem;
+  };
+
+  // function diff_hours(dt2) {
+  //   if (dt2 === "") {
+  //     return "";
+  //   }
+  //   dt2 = new Date(dt2);
+  //   var dt1 = new Date();
+  //   var diff = (dt2.getTime() - dt1.getTime()) / 1000;
+  //   diff /= 60 * 60;
+  //   console.log(Math.abs(Math.round(diff)));
+  //   return Math.abs(Math.round(diff));
+  // }
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const formatDate = (d) => {
     var date = new Date(d);
     return (
@@ -47,36 +101,6 @@ const UnPublishedSignalsComponent = () => {
       ":" +
       addZero(date.getSeconds())
     );
-  };
-
-  const getData = (id) => {
-    var newItem = {};
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].id === id) {
-        newItem = { ...data[i] };
-      }
-    }
-    return newItem;
-  };
-
-  function diff_hours(dt2) {
-    if (dt2 === "") {
-      return "";
-    }
-    dt2 = new Date(dt2);
-    var dt1 = new Date();
-    var diff = (dt2.getTime() - dt1.getTime()) / 1000;
-    diff /= 60 * 60;
-    console.log(Math.abs(Math.round(diff)));
-    return Math.abs(Math.round(diff));
-  }
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
   };
 
   const deleteData = (item) => {
@@ -266,7 +290,8 @@ const UnPublishedSignalsComponent = () => {
               >
                 <Typography color="white">Open Time</Typography>
                 <Typography color="white" style={{ textAlign: "end" }}>
-                  {diff_hours(item.open_date_and_time)} hours ago <br />
+                  {diff_hours(item.open_date_and_time)}
+                  <br />
                   {formatDate(item.open_date_and_time)}
                 </Typography>
               </Grid>
@@ -286,7 +311,8 @@ const UnPublishedSignalsComponent = () => {
               >
                 <Typography color="white">Close Time</Typography>
                 <Typography color="white" style={{ textAlign: "end" }}>
-                  {diff_hours(item.close_date_and_time)} hours ago <br />
+                  {diff_hours(item.close_date_and_time)}
+                  <br />
                   {formatDate(item.close_date_and_time)}
                 </Typography>
               </Grid>

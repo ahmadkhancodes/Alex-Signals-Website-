@@ -54,7 +54,22 @@ const PublishedSignalsComponent = () => {
     }
     return newItem;
   };
-
+  const formatDate = (d) => {
+    var date = new Date(d);
+    return (
+      date.getFullYear() +
+      "-" +
+      addZero(date.getMonth() + 1) +
+      "-" +
+      addZero(date.getDate()) +
+      " " +
+      addZero(date.getHours()) +
+      ":" +
+      addZero(date.getMinutes()) +
+      ":" +
+      addZero(date.getSeconds())
+    );
+  };
   const deleteData = (item) => {
     var dataCopy = [...data];
     dataCopy.splice(dataCopy.indexOf(item), 1);
