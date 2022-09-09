@@ -290,8 +290,6 @@ const UnPublishedSignalsComponent = () => {
               >
                 <Typography color="white">Open Time</Typography>
                 <Typography color="white" style={{ textAlign: "end" }}>
-                  {diff_hours(item.open_date_and_time)}
-                  <br />
                   {formatDate(item.open_date_and_time)}
                 </Typography>
               </Grid>
@@ -311,8 +309,6 @@ const UnPublishedSignalsComponent = () => {
               >
                 <Typography color="white">Close Time</Typography>
                 <Typography color="white" style={{ textAlign: "end" }}>
-                  {diff_hours(item.close_date_and_time)}
-                  <br />
                   {formatDate(item.close_date_and_time)}
                 </Typography>
               </Grid>
