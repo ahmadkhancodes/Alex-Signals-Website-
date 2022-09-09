@@ -302,6 +302,7 @@ export default function InputForm() {
           <DateTimePicker
             id="odat"
             name="odat"
+            inputFormat="dd-MM-yyyy HH:mm:ss"
             value={odat}
             onChange={(value) => setOdat_func(value)}
             renderInput={(params) => <TextField {...params} />}
@@ -312,6 +313,7 @@ export default function InputForm() {
             disabled={selected2 === "closed" ? false : true}
             id="cdat"
             name="cdat"
+            inputFormat="dd-MM-yyyy HH:mm:ss"
             value={cdat}
             onChange={(value) => setCdat_func(value)}
             renderInput={(params) => <TextField {...params} />}
