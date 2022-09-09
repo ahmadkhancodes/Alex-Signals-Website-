@@ -32,29 +32,29 @@ const UnPublishedSignalsComponent = () => {
     return d;
   };
 
-  const diff_hours = (dt2) => {
-    if (dt2 === "") {
-      return "";
-    }
-    var dateNow = new Date();
-    dt2 = new Date(dt2);
-    var seconds = Math.floor((dateNow - dt2) / 1000);
-    var minutes = Math.floor(seconds / 60);
-    var hours = Math.floor(minutes / 60);
-    var days = Math.floor(hours / 24);
+  // const diff_hours = (dt2) => {
+  //   if (dt2 === "") {
+  //     return "";
+  //   }
+  //   var dateNow = new Date();
+  //   dt2 = new Date(dt2);
+  //   var seconds = Math.floor((dateNow - dt2) / 1000);
+  //   var minutes = Math.floor(seconds / 60);
+  //   var hours = Math.floor(minutes / 60);
+  //   var days = Math.floor(hours / 24);
 
-    hours = hours - days * 24;
-    minutes = minutes - days * 24 * 60 - hours * 60;
-    seconds = seconds - days * 24 * 60 * 60 - hours * 60 * 60 - minutes * 60;
-    return (
-      addZero(hours) +
-      "hours " +
-      addZero(minutes) +
-      "mins " +
-      addZero(seconds) +
-      "sec ago"
-    );
-  };
+  //   hours = hours - days * 24;
+  //   minutes = minutes - days * 24 * 60 - hours * 60;
+  //   seconds = seconds - days * 24 * 60 * 60 - hours * 60 * 60 - minutes * 60;
+  //   return (
+  //     addZero(hours) +
+  //     "hours " +
+  //     addZero(minutes) +
+  //     "mins " +
+  //     addZero(seconds) +
+  //     "sec ago"
+  //   );
+  // };
 
   const getData = (id) => {
     var newItem = {};
