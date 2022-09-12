@@ -98,7 +98,7 @@ const UnPublishedSignalsComponent = () => {
 
   const publishData = (item) => {
     var notification_body = {
-      title: "Added",
+      title: item.instrument + " Added",
       message: "Click to see the details",
     };
     // sending notification
