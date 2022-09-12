@@ -20,6 +20,7 @@ const UnPublishedSignalsComponent = () => {
   const dispatch = useDispatch();
   var data = useSelector((state) => state.data.allData);
   const [open, setOpen] = React.useState(false);
+  const [openP, setOpenP] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -77,13 +78,32 @@ const UnPublishedSignalsComponent = () => {
   //   console.log(Math.abs(Math.round(diff)));
   //   return Math.abs(Math.round(diff));
   // }
-
-  const handleClickOpen = () => {
+  const [index, setIndex] = React.useState(0);
+  const handleClickOpen = (id) => {
+    setIndex(id);
     setOpen(true);
+  };
+  const [index2, setIndex2] = React.useState(0);
+  const handleClickOpen2 = (id) => {
+    setIndex2(id);
+    setOpenP(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleCloseP = () => {
+    setOpenP(false);
+  };
+
+  const publishData = (item) => {
+    dispatch(dataActions.updateData({ ...item, ispublished: true }));
+    dispatch(dataActions.saveToFirebase());
+    handleCloseP();
+  };
+  const unPublishData = (item) => {
+    dispatch(dataActions.updateData({ ...item, ispublished: false }));
+    dispatch(dataActions.saveToFirebase());
   };
 
   const formatDate = (d) => {
@@ -322,7 +342,7 @@ const UnPublishedSignalsComponent = () => {
                 <Button
                   variant="contained"
                   color="info"
-                  style={{ width: "32%" }}
+                  style={{ width: "24%" }}
                   onClick={() =>
                     navigate("/updatedata", { state: getData(item.id) })
                   }
@@ -332,7 +352,7 @@ const UnPublishedSignalsComponent = () => {
                 <Button
                   variant="contained"
                   color="success"
-                  style={{ width: "32%" }}
+                  style={{ width: "24%" }}
                   onClick={() => duplicateData(item.id)}
                 >
                   Duplicate
@@ -340,31 +360,70 @@ const UnPublishedSignalsComponent = () => {
                 <Button
                   variant="contained"
                   color="error"
-                  style={{ width: "32%" }}
-                  onClick={() => handleClickOpen()}
+                  style={{ width: "24%" }}
+                  onClick={() => handleClickOpen(item.id)}
                 >
                   Delete
                 </Button>
+                <Dialog
+                  open={open && index === item.id}
+                  onClose={handleClose}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                  <DialogTitle id="alert-dialog-title">
+                    {`Are you sure you want to delete ${item.instrument}?`}
+                  </DialogTitle>
+                  <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={() => deleteData(item)} autoFocus>
+                      Confirm Delete
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+                <Button
+                  disabled={item.ispublished}
+                  variant="contained"
+                  color="info"
+                  style={{ width: "24%" }}
+                  onClick={() => handleClickOpen2(item.id)}
+                >
+                  Publish
+                </Button>
+                <Dialog
+                  open={openP && index2 === item.id}
+                  onClose={handleCloseP}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                  <DialogTitle id="alert-dialog-title">
+                    {`Are you sure you want to publish ${item.instrument} on Mobile App ?`}
+                    {`This will also send notifications`}
+                  </DialogTitle>
+                  <DialogActions>
+                    <Button onClick={handleCloseP}>Cancel</Button>
+                    <Button onClick={() => publishData(item)} autoFocus>
+                      Yes Publish
+                    </Button>
+                  </DialogActions>
+                </Dialog>
               </Grid>
+              <Button
+                disabled={!item.ispublished}
+                variant="contained"
+                style={{
+                  width: "100%",
+                  marginTop: 10,
+                  backgroundColor: !item.ispublished ? "grey" : "black",
+                  color: "white",
+                }}
+                onClick={() => unPublishData(item)}
+              >
+                Unpublish from Mobile App
+              </Button>
             </AccordionDetails>
           </Accordion>
           <Line />
-          <Dialog
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle id="alert-dialog-title">
-              {`Are you sure you want to delete ${item.instrument}?`}
-            </DialogTitle>
-            <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button onClick={() => deleteData(item)} autoFocus>
-                Confirm Delete
-              </Button>
-            </DialogActions>
-          </Dialog>
         </>
       ))}
     </Grid>

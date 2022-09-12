@@ -46,6 +46,7 @@ const dataSlice = createSlice({
             actions.payload?.recommended_leverage;
           state.allData[i]["odat_issued"] = actions.payload?.odat_issued;
           state.allData[i]["cdat_issued"] = actions.payload?.cdat_issued;
+          state.allData[i]["ispublished"] = actions.payload?.ispublished;
         }
       }
     },
