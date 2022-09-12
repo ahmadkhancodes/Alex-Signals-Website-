@@ -104,7 +104,7 @@ const UnPublishedSignalsComponent = () => {
     // sending notification
     (async () => {
       const rawResponse = await fetch(
-        "http://trading-markets-notifications.vercel.app/sendnotification",
+        "https://trading-markets-notifications.vercel.app/sendnotification",
         {
           method: "POST",
           headers: {
