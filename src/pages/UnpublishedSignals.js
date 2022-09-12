@@ -102,19 +102,21 @@ const UnPublishedSignalsComponent = () => {
       message: "Click to see the details",
     };
     // sending notification
-    const rawResponse = fetch(
-      "https://trading-markets-notifications.vercel.app/sendnotification",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(notification_body),
-      }
-    );
-    const content = rawResponse.json();
-    console.log(content);
+    (async () => {
+      const rawResponse = await fetch(
+        "https://trading-markets-notifications.vercel.app/sendnotification",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(notification_body),
+        }
+      );
+      const content = await rawResponse.json();
+      console.log(content);
+    })();
     // code end
     dispatch(dataActions.updateData({ ...item, ispublished: true }));
     dispatch(dataActions.saveToFirebase());
