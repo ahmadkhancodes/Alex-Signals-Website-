@@ -21,6 +21,7 @@ const UnPublishedSignalsComponent = () => {
   var data = useSelector((state) => state.data.allData);
   const [open, setOpen] = React.useState(false);
   const [openP, setOpenP] = React.useState(false);
+  const [openU, setOpenU] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -89,6 +90,15 @@ const UnPublishedSignalsComponent = () => {
     setOpenP(true);
   };
 
+  const [index3, setIndex3] = React.useState(0);
+  const handleClickOpen3 = (id) => {
+    setIndex3(id);
+    setOpenU(true);
+  };
+
+  const handleCloseU = () => {
+    setOpenU(false);
+  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -125,6 +135,7 @@ const UnPublishedSignalsComponent = () => {
   const unPublishData = (item) => {
     dispatch(dataActions.updateData({ ...item, ispublished: false }));
     dispatch(dataActions.saveToFirebase());
+    handleCloseU();
   };
 
   const formatDate = (d) => {
@@ -428,6 +439,22 @@ const UnPublishedSignalsComponent = () => {
                     </Button>
                   </DialogActions>
                 </Dialog>
+                <Dialog
+                  open={openU && index3 === item.id}
+                  onClose={handleCloseU}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                  <DialogTitle id="alert-dialog-title">
+                    {`Are you sure you want to Unpublish ${item.instrument} ?`}
+                  </DialogTitle>
+                  <DialogActions>
+                    <Button onClick={handleCloseU}>Cancel</Button>
+                    <Button onClick={() => unPublishData(item)} autoFocus>
+                      Yes Publish
+                    </Button>
+                  </DialogActions>
+                </Dialog>
               </Grid>
               <Button
                 disabled={!item.ispublished}
@@ -438,7 +465,7 @@ const UnPublishedSignalsComponent = () => {
                   backgroundColor: !item.ispublished ? "grey" : "black",
                   color: "white",
                 }}
-                onClick={() => unPublishData(item)}
+                onClick={() => handleClickOpen3(item.id)}
               >
                 Unpublish from Mobile App
               </Button>
