@@ -7,6 +7,9 @@ import PrivateRoute from "./PrivateRoute";
 import UnpublishedSignals from "./pages/UnpublishedSignals";
 import UpdateData from "./pages/UpdateData";
 import ForgetPassword from "./pages/ForgetPassword";
+import DisclaimerPage from "./pages/DisclaimerPage";
+import DonationPage from "./pages/DonationPage";
+import SocialMediaPage from "./pages/SocialMediaPage";
 import { Provider, useDispatch } from "react-redux";
 import store from "./store/index";
 import { ref, onValue } from "firebase/database";
@@ -42,6 +45,9 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/tableofcontent" element={<UnpublishedSignals />} />
               <Route path="/updatedata" element={<UpdateData />} />
+              <Route path="/disclaimer" element={<DisclaimerPage />} />
+              <Route path="/donation" element={<DonationPage />} />
+              <Route path="/social" element={<SocialMediaPage />} />
             </Route>
           </Routes>
         </AuthProvider>

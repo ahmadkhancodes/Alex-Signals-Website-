@@ -4,6 +4,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import NotificationAddIcon from "@mui/icons-material/NotificationAdd";
 import TocIcon from "@mui/icons-material/Toc";
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
+import InfoIcon from "@mui/icons-material/Info";
+import InterestsIcon from "@mui/icons-material/Interests";
 import { Link } from "react-router-dom";
 
 export const mainListItems = (
@@ -25,6 +28,30 @@ export const mainListItems = (
           <TocIcon />
         </ListItemIcon>
         <ListItemText primary="Table of Contents" />
+      </ListItemButton>
+    </Link>
+    <Link to="/disclaimer" style={{ color: "grey", textDecoration: "none" }}>
+      <ListItemButton>
+        <ListItemIcon>
+          <InfoIcon />
+        </ListItemIcon>
+        <ListItemText primary="Disclaimer" />
+      </ListItemButton>
+    </Link>
+    <Link to="/donation" style={{ color: "grey", textDecoration: "none" }}>
+      <ListItemButton>
+        <ListItemIcon>
+          <VolunteerActivismIcon />
+        </ListItemIcon>
+        <ListItemText primary="Donation" />
+      </ListItemButton>
+    </Link>
+    <Link to="/social" style={{ color: "grey", textDecoration: "none" }}>
+      <ListItemButton>
+        <ListItemIcon>
+          <InterestsIcon />
+        </ListItemIcon>
+        <ListItemText primary="Social" />
       </ListItemButton>
     </Link>
   </React.Fragment>

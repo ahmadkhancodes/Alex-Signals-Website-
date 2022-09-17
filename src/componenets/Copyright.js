@@ -11,7 +11,7 @@ const Copyright = (props) => {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://alexsignals.netlify.app/">
+      <Link color="inherit" href="https://tradingmarkets.netlify.app/">
         Trading Markets
       </Link>{" "}
       {new Date().getFullYear()}
