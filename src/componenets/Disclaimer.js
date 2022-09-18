@@ -6,10 +6,12 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
+import { useSelector, useDispatch } from "react-redux";
+import { dataActions } from "../store/data-slice";
 
 export default function Disclaimer() {
-  var text =
-    "The app is for educational purposes only. It is to show/teach people with trading psychology how to trade sensibly using risk management. The app shows the recommended leverage versus account balance, where to put a stop loss so as to minimize risk, and the percentage risk to account balance per trade! It is not for anyone to use for live trading; it is solely to show how risk management is implemented. If anyone chooses information for live trades, it will be their choice, their decision, and their risk. We have no control over what they choose to do.";
+  const dispatch = useDispatch();
+  var text = useSelector((state) => state.data.disclaimer);
   const [disclaimer, setDisclaimer] = React.useState(text);
   const [edit, setEdit] = React.useState(true);
   const [open, setOpen] = React.useState(false);
@@ -19,6 +21,8 @@ export default function Disclaimer() {
   const handleSubmit = () => {
     setEdit(!edit);
     handleClose();
+    dispatch(dataActions.setDisclaimer(disclaimer));
+    dispatch(dataActions.saveDisclaimerToFirebase());
   };
   const handleEdit = () => {
     if (edit) {

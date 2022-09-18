@@ -21,7 +21,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 function App() {
   const dispatch = useDispatch();
   React.useEffect(() => {
-    onValue(ref(db), (snapshot) => {
+    onValue(ref(db, "DATA_FROM_STORE"), (snapshot) => {
       const data = snapshot.val();
       if (data !== null) {
         var arr = [];
@@ -32,6 +32,24 @@ function App() {
         dispatch(dataActions.setAllData(arr));
       }
       console.log("DATA fetched from APP.JS");
+    });
+    onValue(ref(db, "DISCLAIMER"), (snapshot) => {
+      const data = snapshot.val();
+      if (data !== null) {
+        dispatch(dataActions.setDisclaimer(data["DISCLAIMER"]));
+      }
+    });
+    onValue(ref(db, "DONATION"), (snapshot) => {
+      const data = snapshot.val();
+      if (data !== null) {
+        dispatch(dataActions.setDonation(data["DONATION"]));
+      }
+    });
+    onValue(ref(db, "SOCIAL"), (snapshot) => {
+      const data = snapshot.val();
+      if (data !== null) {
+        dispatch(dataActions.setSocial(data["SOCIAL"]));
+      }
     });
   });
   return (

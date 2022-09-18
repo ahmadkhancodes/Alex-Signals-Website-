@@ -4,6 +4,18 @@ import { db } from "../firebase";
 
 const initialDataState = {
   allData: [],
+  disclaimer: "",
+  donation: "",
+  social: {
+    fbpagelink: "",
+    fbgrouplink: "",
+    instgramlink: "",
+    twitterlink: "",
+    websitelink: "",
+    linkedinlink: "",
+    youtubelink: "",
+    tiktoklink: "",
+  },
 };
 
 const dataSlice = createSlice({
@@ -19,9 +31,33 @@ const dataSlice = createSlice({
       state.allData = actions.payload;
     },
     saveToFirebase(state) {
-      set(ref(db), {
+      set(ref(db, "DATA_FROM_STORE"), {
         DATA_FROM_STORE: JSON.parse(JSON.stringify(state.allData)),
       });
+    },
+    saveDisclaimerToFirebase(state) {
+      set(ref(db, "DISCLAIMER"), {
+        DISCLAIMER: state.disclaimer,
+      });
+    },
+    setDisclaimer(state, actions) {
+      state.disclaimer = actions.payload;
+    },
+    saveDonationToFirebase(state) {
+      set(ref(db, "DONATION"), {
+        DONATION: state.donation,
+      });
+    },
+    setDonation(state, actions) {
+      state.donation = actions.payload;
+    },
+    saveSocialToFirebase(state) {
+      set(ref(db, "SOCIAL"), {
+        SOCIAL: JSON.parse(JSON.stringify(state.social)),
+      });
+    },
+    setSocial(state, actions) {
+      state.social = actions.payload;
     },
     updateData(state, actions) {
       for (let i = 0; i < state.allData.length; i++) {

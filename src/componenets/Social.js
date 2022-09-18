@@ -6,12 +6,36 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
+import { useSelector, useDispatch } from "react-redux";
+import { dataActions } from "../store/data-slice";
 
 export default function Social() {
-  const [fbpagelink, setFbPageLink] = React.useState();
-  const [fbgrouplink, setFbGroupLink] = React.useState();
-  const [instgramlink, setInstagramLink] = React.useState();
-  const [twitterlink, setTwitterLink] = React.useState();
+  const dispatch = useDispatch();
+  var data = useSelector((state) => state.data.social);
+  const [fbpagelink, setFbPageLink] = React.useState(
+    data.fbpagelink ? data.fbpagelink : ""
+  );
+  const [fbgrouplink, setFbGroupLink] = React.useState(
+    data.fbgrouplink ? data.fbgrouplink : ""
+  );
+  const [instgramlink, setInstagramLink] = React.useState(
+    data.instgramlink ? data.instgramlink : ""
+  );
+  const [twitterlink, setTwitterLink] = React.useState(
+    data.twitterlink ? data.twitterlink : ""
+  );
+  const [websitelink, setWebsitelink] = React.useState(
+    data.websitelink ? data.websitelink : ""
+  );
+  const [linkedinlink, setLinkedinlink] = React.useState(
+    data.linkedinlink ? data.linkedinlink : ""
+  );
+  const [tiktoklink, setTiktoklink] = React.useState(
+    data.tiktoklink ? data.tiktoklink : ""
+  );
+  const [youtubelink, setYoutubelink] = React.useState(
+    data.youtubelink ? data.youtubelink : ""
+  );
   const [edit, setEdit] = React.useState(true);
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
@@ -20,6 +44,19 @@ export default function Social() {
   const handleSubmit = () => {
     setEdit(!edit);
     handleClose();
+    var obj = {
+      fbpagelink: fbpagelink,
+      fbgrouplink: fbgrouplink,
+      instgramlink: instgramlink,
+      twitterlink: twitterlink,
+      websitelink: websitelink,
+      linkedinlink: linkedinlink,
+      youtubelink: youtubelink,
+      tiktoklink: tiktoklink,
+    };
+    console.log(obj);
+    dispatch(dataActions.setSocial(obj));
+    dispatch(dataActions.saveSocialToFirebase());
   };
   const handleEdit = () => {
     if (edit) {
@@ -96,6 +133,62 @@ export default function Social() {
             multiline
             rows={1}
             label="Twitter Link"
+            style={{ marginTop: 10 }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} lg={12}>
+          <TextField
+            id="youtubelink"
+            name="youtubelink"
+            value={youtubelink}
+            onChange={(e) => setYoutubelink(e.target.value)}
+            disabled={edit}
+            fullWidth
+            multiline
+            rows={1}
+            label="YouTube Link"
+            style={{ marginTop: 10 }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} lg={12}>
+          <TextField
+            id="linkedinlink"
+            name="linkedinlink"
+            value={linkedinlink}
+            onChange={(e) => setLinkedinlink(e.target.value)}
+            disabled={edit}
+            fullWidth
+            multiline
+            rows={1}
+            label="LinkedIn Link"
+            style={{ marginTop: 10 }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} lg={12}>
+          <TextField
+            id="websitelink"
+            name="websitelink"
+            value={websitelink}
+            onChange={(e) => setWebsitelink(e.target.value)}
+            disabled={edit}
+            fullWidth
+            multiline
+            rows={1}
+            label="Website Link"
+            style={{ marginTop: 10 }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} lg={12}>
+          <TextField
+            id="tiktoklink"
+            name="tiktoklink"
+            value={tiktoklink}
+            onChange={(e) => setTiktoklink(e.target.value)}
+            disabled={edit}
+            fullWidth
+            multiline
+            rows={1}
+            label="Tiktok Link"
             style={{ marginTop: 10 }}
           />
         </Grid>

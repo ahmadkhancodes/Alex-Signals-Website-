@@ -6,9 +6,13 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
+import { useSelector, useDispatch } from "react-redux";
+import { dataActions } from "../store/data-slice";
 
 export default function Donation() {
-  const [donation, setDonation] = React.useState();
+  const dispatch = useDispatch();
+  var text = useSelector((state) => state.data.donation);
+  const [donation, setDonation] = React.useState(text);
   const [edit, setEdit] = React.useState(true);
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
@@ -17,6 +21,8 @@ export default function Donation() {
   const handleSubmit = () => {
     setEdit(!edit);
     handleClose();
+    dispatch(dataActions.setDonation(donation));
+    dispatch(dataActions.saveDonationToFirebase());
   };
   const handleEdit = () => {
     if (edit) {
