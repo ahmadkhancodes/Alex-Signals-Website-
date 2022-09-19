@@ -12,6 +12,7 @@ import { dataActions } from "../store/data-slice";
 export default function LegalComponent() {
   const dispatch = useDispatch();
   var data = useSelector((state) => state.data.legal);
+  console.log(data);
   const [GDPR, setGDPR] = React.useState(data.GDPR ? data.GDPR : "");
   const [CCPA, setCCPA] = React.useState(data.CCPA ? data.CCPA : "");
   const [PECR, setPECR] = React.useState(data.PECR ? data.PECR : "");
