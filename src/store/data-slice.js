@@ -16,6 +16,18 @@ const initialDataState = {
     youtubelink: "",
     tiktoklink: "",
   },
+  legal: {
+    GDPR: "",
+    CCPA: "",
+    PECR: "",
+    PIPEDA: "",
+    AUSTRALIA: "",
+    tos: "",
+    pp: "",
+    infringement: "",
+    donations: "",
+    cookie: "",
+  },
 };
 
 const dataSlice = createSlice({
@@ -56,8 +68,16 @@ const dataSlice = createSlice({
         SOCIAL: JSON.parse(JSON.stringify(state.social)),
       });
     },
+    saveLegalToFirebase(state) {
+      set(ref(db, "LEGAL"), {
+        SOCIAL: JSON.parse(JSON.stringify(state.legal)),
+      });
+    },
     setSocial(state, actions) {
       state.social = actions.payload;
+    },
+    setLegal(state, actions) {
+      state.legal = actions.payload;
     },
     updateData(state, actions) {
       for (let i = 0; i < state.allData.length; i++) {

@@ -17,6 +17,7 @@ import { db } from "./firebase";
 import { dataActions } from "./store/data-slice";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers";
+import Legal from "./pages/Legal";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,6 +52,12 @@ function App() {
         dispatch(dataActions.setSocial(data["SOCIAL"]));
       }
     });
+    onValue(ref(db, "LEGAL"), (snapshot) => {
+      const data = snapshot.val();
+      if (data !== null) {
+        dispatch(dataActions.setLegal(data["LEGAL"]));
+      }
+    });
   });
   return (
     <div>
@@ -66,6 +73,7 @@ function App() {
               <Route path="/disclaimer" element={<DisclaimerPage />} />
               <Route path="/donation" element={<DonationPage />} />
               <Route path="/social" element={<SocialMediaPage />} />
+              <Route path="/legal" element={<Legal />} />
             </Route>
           </Routes>
         </AuthProvider>

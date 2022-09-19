@@ -6,6 +6,7 @@ import NotificationAddIcon from "@mui/icons-material/NotificationAdd";
 import TocIcon from "@mui/icons-material/Toc";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import InfoIcon from "@mui/icons-material/Info";
+import DescriptionIcon from "@mui/icons-material/Description";
 import InterestsIcon from "@mui/icons-material/Interests";
 import { Link } from "react-router-dom";
 
@@ -52,6 +53,14 @@ export const mainListItems = (
           <InterestsIcon />
         </ListItemIcon>
         <ListItemText primary="Social" />
+      </ListItemButton>
+    </Link>
+    <Link to="/legal" style={{ color: "grey", textDecoration: "none" }}>
+      <ListItemButton>
+        <ListItemIcon>
+          <DescriptionIcon />
+        </ListItemIcon>
+        <ListItemText primary="Legal" />
       </ListItemButton>
     </Link>
   </React.Fragment>
