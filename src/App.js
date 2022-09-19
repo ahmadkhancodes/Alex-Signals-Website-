@@ -55,7 +55,7 @@ function App() {
     onValue(ref(db, "LEGAL"), (snapshot) => {
       const data = snapshot.val();
       if (data !== null) {
-        dispatch(dataActions.setLegal(data["LEGAL"]));
+        dispatch(dataActions.setLegal(data["SOCIAL"]));
       }
     });
   });
