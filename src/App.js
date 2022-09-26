@@ -14,10 +14,12 @@ import { Provider, useDispatch } from "react-redux";
 import store from "./store/index";
 import { ref, onValue } from "firebase/database";
 import { db } from "./firebase";
+import { userdb } from "./UserFirebase";
 import { dataActions } from "./store/data-slice";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import Legal from "./pages/Legal";
+import Statistics from "./pages/Statistics";
 
 function App() {
   const dispatch = useDispatch();
@@ -58,6 +60,12 @@ function App() {
         dispatch(dataActions.setLegal(data["SOCIAL"]));
       }
     });
+    onValue(ref(userdb), (snapshot) => {
+      const data = snapshot.val();
+      if (data !== null) {
+        dispatch(dataActions.setUsersData(data));
+      }
+    });
   });
   return (
     <div>
@@ -74,6 +82,7 @@ function App() {
               <Route path="/donation" element={<DonationPage />} />
               <Route path="/social" element={<SocialMediaPage />} />
               <Route path="/legal" element={<Legal />} />
+              <Route path="/stat" element={<Statistics />} />
             </Route>
           </Routes>
         </AuthProvider>

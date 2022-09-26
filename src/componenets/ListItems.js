@@ -8,6 +8,7 @@ import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import InfoIcon from "@mui/icons-material/Info";
 import DescriptionIcon from "@mui/icons-material/Description";
 import InterestsIcon from "@mui/icons-material/Interests";
+import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import { Link } from "react-router-dom";
 
 export const mainListItems = (
@@ -61,6 +62,14 @@ export const mainListItems = (
           <DescriptionIcon />
         </ListItemIcon>
         <ListItemText primary="Legal" />
+      </ListItemButton>
+    </Link>
+    <Link to="/stat" style={{ color: "grey", textDecoration: "none" }}>
+      <ListItemButton>
+        <ListItemIcon>
+          <AutoGraphIcon />
+        </ListItemIcon>
+        <ListItemText primary="Statistics" />
       </ListItemButton>
     </Link>
   </React.Fragment>

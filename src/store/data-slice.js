@@ -28,6 +28,7 @@ const initialDataState = {
     donations: "",
     cookie: "",
   },
+  usersData: null,
 };
 
 const dataSlice = createSlice({
@@ -41,6 +42,9 @@ const dataSlice = createSlice({
     },
     setAllData(state, actions) {
       state.allData = actions.payload;
+    },
+    setUsersData(state, actions) {
+      state.usersData = actions.payload;
     },
     saveToFirebase(state) {
       set(ref(db, "DATA_FROM_STORE"), {
