@@ -15,6 +15,14 @@ export default function TableComponent({ data }) {
       return temp_arr[last_id]["curr_date"];
     }
   };
+  const getCountry = (id) => {
+    if (data) {
+      return data[id]["obj"]["location"]["coords"]["latitude"] > 23 &&
+        data[id]["obj"]["location"]["coords"]["latitude"] < 35
+        ? "Pakistan"
+        : "Cyprus";
+    }
+  };
   return (
     <Paper
       className={{
@@ -44,11 +52,7 @@ export default function TableComponent({ data }) {
                 <TableCell align="center">
                   {data[row]["obj"]["dateInstalled"]}
                 </TableCell>
-                <TableCell align="center">
-                  {data[row]["obj"]["location"] === "Cyprus"
-                    ? "Cyprus"
-                    : "Pakistan"}
-                </TableCell>
+                <TableCell align="center">{getCountry(row)}</TableCell>
                 <TableCell align="center">
                   {Object.keys(data[row]["obj"]["appOpenActivity"]).length}
                 </TableCell>
